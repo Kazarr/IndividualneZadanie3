@@ -28,54 +28,247 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblFirstName = new System.Windows.Forms.Label();
+            this.lblLastName = new System.Windows.Forms.Label();
+            this.txtFirstName = new System.Windows.Forms.TextBox();
+            this.txtLastName = new System.Windows.Forms.TextBox();
+            this.lblAdress = new System.Windows.Forms.Label();
+            this.txtAdress = new System.Windows.Forms.TextBox();
+            this.lblCity = new System.Windows.Forms.Label();
+            this.txtCity = new System.Windows.Forms.TextBox();
+            this.lblPostalCode = new System.Windows.Forms.Label();
+            this.txtPostalCode = new System.Windows.Forms.TextBox();
+            this.lblIdNumber = new System.Windows.Forms.Label();
+            this.txtIdNumber = new System.Windows.Forms.TextBox();
+            this.lblActualOverflow = new System.Windows.Forms.Label();
+            this.lblOverFlowLimit = new System.Windows.Forms.Label();
+            this.txtAcutalOverflow = new System.Windows.Forms.TextBox();
+            this.txtOverFlowLimit = new System.Windows.Forms.TextBox();
+            this.lblIBAN = new System.Windows.Forms.Label();
+            this.lblAmount = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.lblCreationDate = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // lblFirstName
             // 
-            this.label1.BackColor = System.Drawing.Color.DarkSalmon;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(16, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(395, 301);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Tu budú informácie o konkrétnom účte.";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblFirstName.AutoSize = true;
+            this.lblFirstName.Location = new System.Drawing.Point(315, 46);
+            this.lblFirstName.Name = "lblFirstName";
+            this.lblFirstName.Size = new System.Drawing.Size(55, 13);
+            this.lblFirstName.TabIndex = 13;
+            this.lblFirstName.Text = "First name";
             // 
-            // label2
+            // lblLastName
             // 
-            this.label2.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(419, 11);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(373, 301);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Tu budú informácie o konkrétnom klientovi.";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLastName.AutoSize = true;
+            this.lblLastName.Location = new System.Drawing.Point(475, 46);
+            this.lblLastName.Name = "lblLastName";
+            this.lblLastName.Size = new System.Drawing.Size(56, 13);
+            this.lblLastName.TabIndex = 14;
+            this.lblLastName.Text = "Last name";
+            // 
+            // txtFirstName
+            // 
+            this.txtFirstName.Location = new System.Drawing.Point(314, 62);
+            this.txtFirstName.Name = "txtFirstName";
+            this.txtFirstName.Size = new System.Drawing.Size(100, 20);
+            this.txtFirstName.TabIndex = 15;
+            // 
+            // txtLastName
+            // 
+            this.txtLastName.Location = new System.Drawing.Point(478, 62);
+            this.txtLastName.Name = "txtLastName";
+            this.txtLastName.Size = new System.Drawing.Size(100, 20);
+            this.txtLastName.TabIndex = 16;
+            // 
+            // lblAdress
+            // 
+            this.lblAdress.AutoSize = true;
+            this.lblAdress.Location = new System.Drawing.Point(315, 98);
+            this.lblAdress.Name = "lblAdress";
+            this.lblAdress.Size = new System.Drawing.Size(39, 13);
+            this.lblAdress.TabIndex = 17;
+            this.lblAdress.Text = "Adress";
+            // 
+            // txtAdress
+            // 
+            this.txtAdress.Location = new System.Drawing.Point(314, 115);
+            this.txtAdress.Name = "txtAdress";
+            this.txtAdress.Size = new System.Drawing.Size(280, 20);
+            this.txtAdress.TabIndex = 18;
+            // 
+            // lblCity
+            // 
+            this.lblCity.AutoSize = true;
+            this.lblCity.Location = new System.Drawing.Point(315, 138);
+            this.lblCity.Name = "lblCity";
+            this.lblCity.Size = new System.Drawing.Size(24, 13);
+            this.lblCity.TabIndex = 19;
+            this.lblCity.Text = "City";
+            // 
+            // txtCity
+            // 
+            this.txtCity.Location = new System.Drawing.Point(314, 154);
+            this.txtCity.Name = "txtCity";
+            this.txtCity.Size = new System.Drawing.Size(100, 20);
+            this.txtCity.TabIndex = 20;
+            // 
+            // lblPostalCode
+            // 
+            this.lblPostalCode.AutoSize = true;
+            this.lblPostalCode.Location = new System.Drawing.Point(428, 138);
+            this.lblPostalCode.Name = "lblPostalCode";
+            this.lblPostalCode.Size = new System.Drawing.Size(63, 13);
+            this.lblPostalCode.TabIndex = 21;
+            this.lblPostalCode.Text = "Postal code";
+            // 
+            // txtPostalCode
+            // 
+            this.txtPostalCode.Location = new System.Drawing.Point(431, 154);
+            this.txtPostalCode.Name = "txtPostalCode";
+            this.txtPostalCode.Size = new System.Drawing.Size(100, 20);
+            this.txtPostalCode.TabIndex = 22;
+            // 
+            // lblIdNumber
+            // 
+            this.lblIdNumber.AutoSize = true;
+            this.lblIdNumber.Location = new System.Drawing.Point(315, 192);
+            this.lblIdNumber.Name = "lblIdNumber";
+            this.lblIdNumber.Size = new System.Drawing.Size(53, 13);
+            this.lblIdNumber.TabIndex = 23;
+            this.lblIdNumber.Text = "IdNumber";
+            // 
+            // txtIdNumber
+            // 
+            this.txtIdNumber.Location = new System.Drawing.Point(314, 209);
+            this.txtIdNumber.Name = "txtIdNumber";
+            this.txtIdNumber.Size = new System.Drawing.Size(100, 20);
+            this.txtIdNumber.TabIndex = 24;
+            // 
+            // lblActualOverflow
+            // 
+            this.lblActualOverflow.AutoSize = true;
+            this.lblActualOverflow.Location = new System.Drawing.Point(12, 113);
+            this.lblActualOverflow.Name = "lblActualOverflow";
+            this.lblActualOverflow.Size = new System.Drawing.Size(80, 13);
+            this.lblActualOverflow.TabIndex = 5;
+            this.lblActualOverflow.Text = "Actual overflow";
+            // 
+            // lblOverFlowLimit
+            // 
+            this.lblOverFlowLimit.AutoSize = true;
+            this.lblOverFlowLimit.Location = new System.Drawing.Point(146, 113);
+            this.lblOverFlowLimit.Name = "lblOverFlowLimit";
+            this.lblOverFlowLimit.Size = new System.Drawing.Size(69, 13);
+            this.lblOverFlowLimit.TabIndex = 6;
+            this.lblOverFlowLimit.Text = "Overflow limit";
+            // 
+            // txtAcutalOverflow
+            // 
+            this.txtAcutalOverflow.Location = new System.Drawing.Point(12, 129);
+            this.txtAcutalOverflow.Name = "txtAcutalOverflow";
+            this.txtAcutalOverflow.Size = new System.Drawing.Size(100, 20);
+            this.txtAcutalOverflow.TabIndex = 7;
+            // 
+            // txtOverFlowLimit
+            // 
+            this.txtOverFlowLimit.Location = new System.Drawing.Point(149, 129);
+            this.txtOverFlowLimit.Name = "txtOverFlowLimit";
+            this.txtOverFlowLimit.Size = new System.Drawing.Size(100, 20);
+            this.txtOverFlowLimit.TabIndex = 8;
+            // 
+            // lblIBAN
+            // 
+            this.lblIBAN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIBAN.Location = new System.Drawing.Point(12, 41);
+            this.lblIBAN.Name = "lblIBAN";
+            this.lblIBAN.Size = new System.Drawing.Size(297, 20);
+            this.lblIBAN.TabIndex = 9;
+            this.lblIBAN.Tag = "";
+            this.lblIBAN.Text = "labelSIbanom";
+            // 
+            // lblAmount
+            // 
+            this.lblAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAmount.Location = new System.Drawing.Point(11, 73);
+            this.lblAmount.Name = "lblAmount";
+            this.lblAmount.Size = new System.Drawing.Size(297, 20);
+            this.lblAmount.TabIndex = 10;
+            this.lblAmount.Tag = "";
+            this.lblAmount.Text = "labelSoZostakom";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Enabled = false;
+            this.dateTimePicker1.Location = new System.Drawing.Point(12, 232);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(184, 20);
+            this.dateTimePicker1.TabIndex = 11;
+            // 
+            // lblCreationDate
+            // 
+            this.lblCreationDate.AutoSize = true;
+            this.lblCreationDate.Location = new System.Drawing.Point(13, 216);
+            this.lblCreationDate.Name = "lblCreationDate";
+            this.lblCreationDate.Size = new System.Drawing.Size(70, 13);
+            this.lblCreationDate.TabIndex = 12;
+            this.lblCreationDate.Text = "Creation date";
             // 
             // frmAccount
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(805, 321);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClientSize = new System.Drawing.Size(604, 261);
+            this.Controls.Add(this.txtIdNumber);
+            this.Controls.Add(this.lblIdNumber);
+            this.Controls.Add(this.txtPostalCode);
+            this.Controls.Add(this.lblPostalCode);
+            this.Controls.Add(this.txtCity);
+            this.Controls.Add(this.lblCity);
+            this.Controls.Add(this.txtAdress);
+            this.Controls.Add(this.lblAdress);
+            this.Controls.Add(this.txtLastName);
+            this.Controls.Add(this.txtFirstName);
+            this.Controls.Add(this.lblLastName);
+            this.Controls.Add(this.lblFirstName);
+            this.Controls.Add(this.lblCreationDate);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.lblAmount);
+            this.Controls.Add(this.lblIBAN);
+            this.Controls.Add(this.txtOverFlowLimit);
+            this.Controls.Add(this.txtAcutalOverflow);
+            this.Controls.Add(this.lblOverFlowLimit);
+            this.Controls.Add(this.lblActualOverflow);
             this.Name = "frmAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmAccount";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblFirstName;
+        private System.Windows.Forms.Label lblLastName;
+        private System.Windows.Forms.TextBox txtFirstName;
+        private System.Windows.Forms.TextBox txtLastName;
+        private System.Windows.Forms.Label lblAdress;
+        private System.Windows.Forms.TextBox txtAdress;
+        private System.Windows.Forms.Label lblCity;
+        private System.Windows.Forms.TextBox txtCity;
+        private System.Windows.Forms.Label lblPostalCode;
+        private System.Windows.Forms.TextBox txtPostalCode;
+        private System.Windows.Forms.Label lblIdNumber;
+        private System.Windows.Forms.TextBox txtIdNumber;
+        private System.Windows.Forms.Label lblActualOverflow;
+        private System.Windows.Forms.Label lblOverFlowLimit;
+        private System.Windows.Forms.TextBox txtAcutalOverflow;
+        private System.Windows.Forms.TextBox txtOverFlowLimit;
+        private System.Windows.Forms.Label lblIBAN;
+        private System.Windows.Forms.Label lblAmount;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label lblCreationDate;
     }
 }

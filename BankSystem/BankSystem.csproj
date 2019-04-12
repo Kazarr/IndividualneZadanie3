@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountsViewModel.cs" />
+    <Compile Include="AccountViewModel.cs" />
     <Compile Include="ClientManagmentViewModel.cs" />
     <Compile Include="frmClientManagement.cs">
       <SubType>Form</SubType>

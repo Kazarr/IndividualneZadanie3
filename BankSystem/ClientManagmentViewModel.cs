@@ -10,12 +10,13 @@ namespace BankSystem
 {
     public class ClientManagmentViewModel
     {
+        public ClientManagmentRepository ClientManagmentRepository { get; set; }
+
         public ClientManagmentViewModel()
         {
             ClientManagmentRepository = new ClientManagmentRepository();
         }
 
-        public ClientManagmentRepository ClientManagmentRepository { get; set; }
         public DataSet LoadInfo(string pattern)
         {
             return ClientManagmentRepository.LoadClientManagment(pattern);

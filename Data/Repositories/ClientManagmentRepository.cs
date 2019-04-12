@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class CardRepository:MyConnection
+    public class ClientManagmentRepository:MyConnection
     {
-        public DataSet LoadCards()
+        public DataSet LoadClientManagment(string pattern)
         {
             using (SqlConnection connection = base.Connection)
             {
@@ -20,12 +20,15 @@ namespace Data.Repositories
                     using (SqlCommand command = new SqlCommand())
                     {
                         command.Connection = connection;
-                        command.CommandText = @"SELECT * FROM Card";
+                        command.CommandText = @"SELECT CreationDate, ExpireDate, FirstName, LastName, Amount, IBAN, ActualOverFlow, OverFlowLimit FROM Account as a
+                                                JOIN Client as c on a.Id_Client = c.id
+                                                WHERE IdNumber = @IdNumber";
+                        command.Parameters.Add("@IdNumber", SqlDbType.VarChar).Value = pattern;
                         using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                         {
                             DataSet ds = new DataSet();
-                            adapter.Fill(ds, "Card");
-                            DataTable dt = ds.Tables["Card"];
+                            adapter.Fill(ds, "Account");
+                            DataTable dt = ds.Tables["Account"];
                             return ds;
                         }
                     }

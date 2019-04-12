@@ -13,14 +13,14 @@ namespace Data.Repositories
     {
         public DataSet LoadAccount()
         {
-            using (base.Connection)
+            using (SqlConnection connection = base.Connection)
             {
                 try
                 {
-                    base.Connection.Open();
+                    connection.Open();
                     using(SqlCommand command = new SqlCommand())
                     {
-                        command.Connection = base.Connection;
+                        command.Connection = connection;
                         command.CommandText = @"SELECT * FROM Account";
                         using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                         {

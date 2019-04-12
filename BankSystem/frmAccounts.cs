@@ -13,22 +13,21 @@ namespace BankSystem
 {
     public partial class frmAccounts : Form
     {
-        public AccountRepository AccountRepository { get; set; }
+        public AccountsViewModel AccountsViewModel { get; set; }
         public frmAccounts()
         {
             InitializeComponent();
-            AccountRepository = new AccountRepository();
-            dgvAccounts.DataSource = AccountRepository.LoadAccount();
+            dgvAccounts.DataSource = AccountsViewModel.LoadAccounts();
             dgvAccounts.DataMember = "Account";
             dgvAccounts.Columns[0].Visible = false;
         }
 
         private void cmdManageAccount_Click(object sender, EventArgs e)
         {
-            using (frmClientManagement newForm = new frmClientManagement())
-            {
-                newForm.ShowDialog();
-            }
+            //using (frmClientManagement newForm = new frmClientManagement())
+            //{
+            //    newForm.ShowDialog();
+            //}
         }
     }
 }

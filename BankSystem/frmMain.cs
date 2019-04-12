@@ -12,16 +12,28 @@ namespace BankSystem
 {
     public partial class frmMain : Form
     {
+        public MainViewModel MainViewModel { get; set; }
         public frmMain()
         {
             InitializeComponent();
+            MainViewModel = new MainViewModel();
         }
 
         private void cmdFindClient_Click(object sender, EventArgs e)
         {
-            using (frmClientManagement newForm = new frmClientManagement())
+            
+            if (MainViewModel.FindClient(txtFindClient.Text))
             {
-                newForm.ShowDialog();
+                lblError.Visible = false;
+                using (frmClientManagement newForm = new frmClientManagement(txtFindClient.Text))
+                {
+                    newForm.ShowDialog();
+                }
+            }
+            else
+            {
+                lblError.Text = "Ty kokot taky tam neni";
+                lblError.Visible = true;
             }
         }
 

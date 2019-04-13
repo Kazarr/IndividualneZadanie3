@@ -12,6 +12,18 @@ namespace Data.Models
         {
         }
 
+        public Account(int id, int idClient, int idBank, DateTime creationDate, decimal amount, string iBAN, decimal actualOverFlow, decimal overFlowLimit)
+        {
+            Id = id;
+            CreationDate = creationDate;
+            Amount = amount;
+            IBAN = iBAN ?? throw new ArgumentNullException(nameof(iBAN));
+            ActualOverFlow = actualOverFlow;
+            OverFlowLimit = overFlowLimit;
+            IdClient = idClient;
+            IdBank = idBank;
+        }
+
         public Account(int id, int idClient, int idBank, DateTime creationDate, DateTime expireDate, decimal amount, string iBAN, decimal actualOverFlow, decimal overFlowLimit)
         {
             Id = id;
@@ -25,11 +37,11 @@ namespace Data.Models
             OverFlowLimit = overFlowLimit;
         }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public DateTime CreationDate { get; private set; }
         public DateTime ExpireDate { get; set; }
         public decimal Amount { get; set; }
-        public string IBAN { get; private set; }
+        public string IBAN { get; set; }
         public decimal ActualOverFlow { get; set; }
         public decimal OverFlowLimit { get; set; }
         public int IdClient { get; set; }

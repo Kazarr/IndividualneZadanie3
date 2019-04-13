@@ -19,7 +19,7 @@ namespace Data.Models
             PostalCode = postalCode;
         }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string PostalCode { get; set; }
     }

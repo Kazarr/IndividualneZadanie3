@@ -33,13 +33,13 @@ namespace Data.Repositories
                             int idClient = int.Parse(ds.Tables["Account"].Rows[0][1].ToString());
                             int idBank = int.Parse(ds.Tables["Account"].Rows[0][2].ToString());
                             DateTime CreationDate = DateTime.Parse(ds.Tables["Account"].Rows[0][3].ToString());
-                            DateTime ExpireDate = DateTime.Parse(ds.Tables["Account"].Rows[0][4].ToString());
+                            //DateTime ExpireDate = DateTime.Parse(ds.Tables["Account"].Rows[0][4].ToString());
                             decimal amount = decimal.Parse(ds.Tables["Account"].Rows[0][5].ToString());
                             string IBAN = ds.Tables["Account"].Rows[0][6].ToString();
                             decimal ActualOverFlow = decimal.Parse(ds.Tables["Account"].Rows[0][7].ToString());
                             decimal OverFlowLimit = decimal.Parse(ds.Tables["Account"].Rows[0][8].ToString());
 
-                            return new Account(id,idClient, idBank, CreationDate,ExpireDate,amount,IBAN,ActualOverFlow,OverFlowLimit);
+                            return new Account(id,idClient, idBank, CreationDate,amount,IBAN,ActualOverFlow,OverFlowLimit);
                         }
                     }
                 }catch(Exception e)
@@ -72,6 +72,36 @@ namespace Data.Repositories
                         }
                     }
                 }catch(Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+        public bool InsertAccount(Account account)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"INSERT INTO Account (Id_Client, Id_Bank, Iban)
+                                                VALUES (@IdClient, 1, @Iban)";
+                        command.Parameters.Add("@IdClient", SqlDbType.Int).Value = account.IdClient;
+                        command.Parameters.Add("@Iban", SqlDbType.VarChar).Value = account.IBAN;
+                        if (command.ExecuteNonQuery() > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception e)
                 {
                     throw;
                 }

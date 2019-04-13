@@ -77,5 +77,30 @@ namespace Data.Repositories
                 }
             }
         }
+        public int InsertCity(City city)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"INSERT INTO City (Name, PostalCode)
+                                                OUTPUT INSERTED.Id
+                                                VALUES (@Name, @PostalCode)";
+                        command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = city.Name;
+                        command.Parameters.Add("@PostalCode", SqlDbType.NVarChar).Value = city.PostalCode;
+                        int ret = (int)command.ExecuteScalar();
+                        return ret;
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }

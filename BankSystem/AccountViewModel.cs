@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Data.Models;
 using Data.Repositories;
+using sinkien.IBAN4Net;
 
 namespace BankSystem
 {
@@ -25,7 +26,15 @@ namespace BankSystem
             _account = _accountRepository.LoadAccount(accountId);
             _client = _clientRepository.LoadClient(_account.IdClient);
             _city = _cityRepository.LoadCity(_client.IdCity);
-            
+        }
+        public AccountViewModel()
+        {
+            _accountRepository = new AccountRepository();
+            _clientRepository = new ClientRepository();
+            _cityRepository = new CityRepository();
+            _account = new Account();
+            _client = new Client();
+            _city = new City();
         }
 
         #region AccountGetters
@@ -90,6 +99,10 @@ namespace BankSystem
         {
             _account.OverFlowLimit = overFlowLImit;
         }
+        public void SetAccountIban(string IBAN)
+        {
+            _account.IBAN = IBAN;
+        }
         #endregion
 
         #region Client Setters
@@ -133,6 +146,33 @@ namespace BankSystem
         public void UpdateCity()
         {
             _cityRepository.UpdateCity(_city);
+        }
+
+        public void InsertAccount()
+        {
+            _accountRepository.InsertAccount(_account);
+        }
+        public void InserClient()
+        {
+            _client.Id = _clientRepository.InsertClient(_client);
+            _account.IdClient = _client.Id;
+        }
+        public void InsertCity()
+        {
+            _city.Id =_cityRepository.InsertCity(_city);
+            _client.IdCity = _city.Id;
+        }
+
+        public string GenerateIBAN()
+        {
+            Random r = new Random();
+            Iban iban = new IbanBuilder()
+                .CountryCode(CountryCode.GetCountryCode("SK"))
+                .BankCode(r.Next(10000).ToString())
+                .AccountNumberPrefix(r.Next(1000000).ToString())
+                .AccountNumber(r.Next(Int32.MaxValue).ToString())
+                .Build();
+            return iban.Value.ToString();
         }
 
     }

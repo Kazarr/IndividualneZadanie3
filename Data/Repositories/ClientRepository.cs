@@ -109,6 +109,33 @@ namespace Data.Repositories
                 }
             }
         }
+        public int InsertClient(Client client)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"INSERT INTO Client (FirstName, LastName, Adress, Id_City ,IdNumber)
+                                                OUTPUT INSERTED.Id
+                                                VALUES (@Firstname, @LastName, @Adress, @Id_City, @IdNumber)";
+                        command.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = client.FirstName;
+                        command.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = client.LastName;
+                        command.Parameters.Add("@Adress", SqlDbType.NVarChar).Value = client.Adress;
+                        command.Parameters.Add("@Id_City", SqlDbType.Int).Value = client.IdCity;
+                        command.Parameters.Add("@IdNumber", SqlDbType.VarChar).Value = client.IdNumber;
+                        return (int)command.ExecuteScalar();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
 
         public bool FindClientById(int id)
         {

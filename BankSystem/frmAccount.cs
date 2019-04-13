@@ -22,6 +22,11 @@ namespace BankSystem
             InitializeComponent();
             btnOk.Visible = false;
             btnSave.Visible = true;
+            _accountViewModel = new AccountViewModel();
+            lblIBAN.Text = _accountViewModel.GenerateIBAN();
+            lblAmount.Text = "0";
+            lblAcutalOverFlowValue.Text = "0";
+            dtpCreationDate.Value = DateTime.Now;
         }
 
         /// <summary>
@@ -75,6 +80,25 @@ namespace BankSystem
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            _accountViewModel.SetAccountIban(lblIBAN.Text);
+
+            _accountViewModel.SetClientFirstName(txtFirstName.Text);
+            _accountViewModel.SetClientlastName(txtLastName.Text);
+            _accountViewModel.SetClientAdress(txtAdress.Text);
+            _accountViewModel.SetClientIdNumber(txtIdNumber.Text);
+
+            _accountViewModel.SetCityName(txtCity.Text);
+            _accountViewModel.SetCityPostaCode(txtPostalCode.Text);
+
+            _accountViewModel.InsertCity();
+            _accountViewModel.InserClient();
+            _accountViewModel.InsertAccount();
+            
+
         }
     }
 }

@@ -14,7 +14,7 @@ namespace BankSystem
     {
         private string _pattern;
         private int _accountId;
-        public ClientManagmentViewModel ClientManagmentViewModel { get; set; }
+        private ClientManagmentViewModel _clientManagmentViewModel { get; set; }
 
         /// <summary>
         /// Backup, do not really use :)
@@ -29,10 +29,15 @@ namespace BankSystem
         {
             InitializeComponent();
             _pattern = pattern;
-            ClientManagmentViewModel = new ClientManagmentViewModel();
-            dgvAccount.DataSource = ClientManagmentViewModel.LoadClientManagment(_pattern);
+            _clientManagmentViewModel = new ClientManagmentViewModel();
+            dgvAccount.DataSource = _clientManagmentViewModel.LoadClientManagment(_pattern);
             dgvAccount.DataMember = "Account";
+            _accountId = (int)dgvAccount.Rows[0].Cells[0].Value;
             dgvAccount.Columns["Id"].Visible = false;
+
+            dgvCards.DataSource = _clientManagmentViewModel.LoadCards(_accountId);
+            dgvCards.DataMember = "Card";
+            dgvCards.Columns["Id"].Visible = false;
         }
 
         private void cmdUpdate_Click(object sender, EventArgs e)
@@ -42,7 +47,7 @@ namespace BankSystem
                 newForm.ShowDialog();
                 if(newForm.DialogResult == DialogResult.OK)
                 {
-                    dgvAccount.DataSource = ClientManagmentViewModel.LoadUpdatedClientManagment(_accountId);
+                    dgvAccount.DataSource = _clientManagmentViewModel.LoadUpdatedClientManagment(_accountId);
                     dgvAccount.DataMember = "Account";
                     dgvAccount.Columns["Id"].Visible = false;
                 }
@@ -92,6 +97,27 @@ namespace BankSystem
         private void dgvAccount_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             _accountId = (int)dgvAccount.Rows[0].Cells[0].Value;
+        }
+
+        private void btnAddCard_Click(object sender, EventArgs e)
+        {
+            _clientManagmentViewModel.InsertRandomCard(_accountId);
+
+            dgvCards.DataSource = _clientManagmentViewModel.LoadCards(_accountId);
+            dgvCards.DataMember = "Card";
+        }
+
+        private void btnCloseCard_Click(object sender, EventArgs e)
+        {
+            _clientManagmentViewModel.UpdateCard(_accountId);
+
+            dgvCards.DataSource = _clientManagmentViewModel.LoadCards(_accountId);
+            dgvCards.DataMember = "Card";
+        }
+
+        private void dgvCards_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            //_clientManagmentViewModel.
         }
     }
 }

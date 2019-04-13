@@ -4,31 +4,53 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Data.Models;
 using Data.Repositories;
 
 namespace BankSystem
 {
     public class ClientManagmentViewModel
     {
-        public ClientManagmentRepository ClientManagmentRepository { get; set; }
+        private ClientManagmentRepository _clientManagmentRepository { get; set; }
+        private CardRepository _cardRepository { get; set; }
+        private Card _card { get; set; }
+        private Client _client { get; set; }
+        private Account _account { get; set; }
 
         public ClientManagmentViewModel()
         {
-            ClientManagmentRepository = new ClientManagmentRepository();
+            _clientManagmentRepository = new ClientManagmentRepository();
+            _cardRepository = new CardRepository();
+            _card = new Card();
         }
 
         public DataSet LoadClientManagment(string pattern)
         {
-            return ClientManagmentRepository.LoadClientManagment(pattern);
+            return _clientManagmentRepository.LoadClientManagment(pattern);
         }
         public DataSet LoadUpdatedClientManagment(int accountId)
         {
-            return ClientManagmentRepository.LoadUpdatedClientManagment(accountId);
+            return _clientManagmentRepository.LoadUpdatedClientManagment(accountId);
         }
 
-        //public void UpdateInfo(int idAccount, int idClient, decimal overFlowLimit, string firstName, string lastName, string adress, string cityName, string postalCode, string IdNumber)
-        //{
-        //    ClientManagmentRepository.SaveClientManagment(idAccount, idClient, overFlowLimit, firstName, lastName, adress, cityName, postalCode, IdNumber);
-        //}
+        public DataSet LoadCards(int accountId)
+        {
+            return _cardRepository.LoadCards(accountId);
+        }
+
+        public void InsertRandomCard(int accoutnId)
+        {
+            Random r = new Random();
+            _card.Id_Account = accoutnId;
+            _card.Number = r.Next(Int32.MaxValue);
+            _card.Pin = r.Next(0, 10000).ToString();
+            _card.Id = _cardRepository.InsertCard(_card);
+        }
+        public void UpdateCard(int accountId)
+        {
+            _cardRepository.UpdateCard(_card);
+        }
+
+
     }
 }

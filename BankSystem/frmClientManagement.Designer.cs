@@ -35,7 +35,6 @@
             this.cmdAllTransactions = new System.Windows.Forms.Button();
             this.cmdWithdrawal = new System.Windows.Forms.Button();
             this.cmdDeposit = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -43,7 +42,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.dgvAccount = new System.Windows.Forms.DataGridView();
+            this.dgvCards = new System.Windows.Forms.DataGridView();
+            this.btnAddCard = new System.Windows.Forms.Button();
+            this.btnCloseCard = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCards)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -118,18 +121,6 @@
             this.cmdDeposit.Text = "Deposit";
             this.cmdDeposit.UseVisualStyleBackColor = true;
             this.cmdDeposit.Click += new System.EventHandler(this.cmdDeposit_Click);
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.DarkMagenta;
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(749, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(190, 389);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Niekde v tomto okne bude grid s platobnými kartami priradenými k účtu.";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -209,11 +200,46 @@
             this.dgvAccount.TabIndex = 18;
             this.dgvAccount.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccount_RowEnter);
             // 
+            // dgvCards
+            // 
+            this.dgvCards.AllowUserToAddRows = false;
+            this.dgvCards.AllowUserToDeleteRows = false;
+            this.dgvCards.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCards.Location = new System.Drawing.Point(749, 10);
+            this.dgvCards.Name = "dgvCards";
+            this.dgvCards.ReadOnly = true;
+            this.dgvCards.Size = new System.Drawing.Size(190, 308);
+            this.dgvCards.TabIndex = 19;
+            this.dgvCards.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCards_RowEnter);
+            // 
+            // btnAddCard
+            // 
+            this.btnAddCard.Location = new System.Drawing.Point(864, 344);
+            this.btnAddCard.Name = "btnAddCard";
+            this.btnAddCard.Size = new System.Drawing.Size(75, 23);
+            this.btnAddCard.TabIndex = 20;
+            this.btnAddCard.Text = "Add Card";
+            this.btnAddCard.UseVisualStyleBackColor = true;
+            this.btnAddCard.Click += new System.EventHandler(this.btnAddCard_Click);
+            // 
+            // btnCloseCard
+            // 
+            this.btnCloseCard.Location = new System.Drawing.Point(749, 344);
+            this.btnCloseCard.Name = "btnCloseCard";
+            this.btnCloseCard.Size = new System.Drawing.Size(75, 23);
+            this.btnCloseCard.TabIndex = 21;
+            this.btnCloseCard.Text = "Close Card";
+            this.btnCloseCard.UseVisualStyleBackColor = true;
+            this.btnCloseCard.Click += new System.EventHandler(this.btnCloseCard_Click);
+            // 
             // frmClientManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(949, 410);
+            this.Controls.Add(this.btnCloseCard);
+            this.Controls.Add(this.btnAddCard);
+            this.Controls.Add(this.dgvCards);
             this.Controls.Add(this.dgvAccount);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -221,7 +247,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.cmdDeposit);
             this.Controls.Add(this.cmdWithdrawal);
             this.Controls.Add(this.cmdAllTransactions);
@@ -233,6 +258,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmClientManagement";
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCards)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -246,7 +272,6 @@
         private System.Windows.Forms.Button cmdAllTransactions;
         private System.Windows.Forms.Button cmdWithdrawal;
         private System.Windows.Forms.Button cmdDeposit;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -254,5 +279,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridView dgvAccount;
+        private System.Windows.Forms.DataGridView dgvCards;
+        private System.Windows.Forms.Button btnAddCard;
+        private System.Windows.Forms.Button btnCloseCard;
     }
 }

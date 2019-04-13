@@ -60,5 +60,34 @@ namespace Data.Repositories
                 
             }
         }
+        public DataSet LoadUpdatedClientManagment(int accountId)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"SELECT a.id, CreationDate, ExpireDate, FirstName, LastName, Amount, IBAN, ActualOverFlow, OverFlowLimit FROM Account as a
+                                                JOIN Client as c on a.Id_Client = c.id
+                                                WHERE a.Id = @Id";
+                        command.Parameters.Add("@Id", SqlDbType.Int).Value = accountId;
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            DataSet ds = new DataSet();
+                            adapter.Fill(ds, "Account");
+                            DataTable dt = ds.Tables["Account"];
+                            return ds;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }

@@ -20,6 +20,8 @@ namespace BankSystem
         public frmAccount()
         {
             InitializeComponent();
+            btnOk.Visible = false;
+            btnSave.Visible = true;
         }
 
         /// <summary>
@@ -29,6 +31,8 @@ namespace BankSystem
         public frmAccount(int accountId)
         {
             InitializeComponent();
+            btnOk.Visible = true;
+            btnSave.Visible = false;
             _accountViewModel = new AccountViewModel(accountId);
             lblIBAN.Text = _accountViewModel.GetAccountIBA();
             lblAmount.Text = _accountViewModel.GetAccountAmount().ToString();

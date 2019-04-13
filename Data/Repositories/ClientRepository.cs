@@ -86,11 +86,12 @@ namespace Data.Repositories
                                                 SET FirstName = @FirstName,
                                                     LastName = @LastName,
                                                     Adress = @Adress,
-                                                    IdNumber = IdNumber
+                                                    IdNumber = @IdNumber
                                                 WHERE Id = @IdClient";
                         command.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = client.FirstName;
                         command.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = client.LastName;
                         command.Parameters.Add("@Adress", SqlDbType.NVarChar).Value = client.Adress;
+                        command.Parameters.Add("@IdNumber", SqlDbType.VarChar).Value = client.IdNumber;
                         command.Parameters.Add("@IdClient", SqlDbType.Int).Value = client.Id;
                         if (command.ExecuteNonQuery() > 0)
                         {

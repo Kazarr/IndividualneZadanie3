@@ -50,6 +50,7 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblAcutalOverFlowValue = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblFirstName
@@ -239,11 +240,21 @@
             this.lblAcutalOverFlowValue.TabIndex = 27;
             this.lblAcutalOverFlowValue.Text = "label1";
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(519, 233);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 28;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            // 
             // frmAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(604, 261);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblAcutalOverFlowValue);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -298,5 +309,6 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblAcutalOverFlowValue;
+        private System.Windows.Forms.Button btnSave;
     }
 }

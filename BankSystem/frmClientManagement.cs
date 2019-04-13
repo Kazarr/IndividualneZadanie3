@@ -30,7 +30,7 @@ namespace BankSystem
             InitializeComponent();
             _pattern = pattern;
             ClientManagmentViewModel = new ClientManagmentViewModel();
-            dgvAccount.DataSource = ClientManagmentViewModel.LoadInfo(_pattern);
+            dgvAccount.DataSource = ClientManagmentViewModel.LoadClientManagment(_pattern);
             dgvAccount.DataMember = "Account";
             dgvAccount.Columns["Id"].Visible = false;
         }
@@ -42,7 +42,7 @@ namespace BankSystem
                 newForm.ShowDialog();
                 if(newForm.DialogResult == DialogResult.OK)
                 {
-                    dgvAccount.DataSource = ClientManagmentViewModel.LoadInfo(_pattern);
+                    dgvAccount.DataSource = ClientManagmentViewModel.LoadUpdatedClientManagment(_accountId);
                     dgvAccount.DataMember = "Account";
                     dgvAccount.Columns["Id"].Visible = false;
                 }

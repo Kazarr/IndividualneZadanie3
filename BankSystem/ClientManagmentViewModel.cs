@@ -17,9 +17,13 @@ namespace BankSystem
             ClientManagmentRepository = new ClientManagmentRepository();
         }
 
-        public DataSet LoadInfo(string pattern)
+        public DataSet LoadClientManagment(string pattern)
         {
             return ClientManagmentRepository.LoadClientManagment(pattern);
+        }
+        public DataSet LoadUpdatedClientManagment(int accountId)
+        {
+            return ClientManagmentRepository.LoadUpdatedClientManagment(accountId);
         }
 
         //public void UpdateInfo(int idAccount, int idClient, decimal overFlowLimit, string firstName, string lastName, string adress, string cityName, string postalCode, string IdNumber)

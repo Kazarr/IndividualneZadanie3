@@ -42,12 +42,14 @@
             this.txtIdNumber = new System.Windows.Forms.TextBox();
             this.lblActualOverflow = new System.Windows.Forms.Label();
             this.lblOverFlowLimit = new System.Windows.Forms.Label();
-            this.txtAcutalOverflow = new System.Windows.Forms.TextBox();
             this.txtOverFlowLimit = new System.Windows.Forms.TextBox();
             this.lblIBAN = new System.Windows.Forms.Label();
             this.lblAmount = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpCreationDate = new System.Windows.Forms.DateTimePicker();
             this.lblCreationDate = new System.Windows.Forms.Label();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.lblAcutalOverFlowValue = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblFirstName
@@ -164,13 +166,6 @@
             this.lblOverFlowLimit.TabIndex = 6;
             this.lblOverFlowLimit.Text = "Overflow limit";
             // 
-            // txtAcutalOverflow
-            // 
-            this.txtAcutalOverflow.Location = new System.Drawing.Point(12, 129);
-            this.txtAcutalOverflow.Name = "txtAcutalOverflow";
-            this.txtAcutalOverflow.Size = new System.Drawing.Size(100, 20);
-            this.txtAcutalOverflow.TabIndex = 7;
-            // 
             // txtOverFlowLimit
             // 
             this.txtOverFlowLimit.Location = new System.Drawing.Point(149, 129);
@@ -198,13 +193,13 @@
             this.lblAmount.Tag = "";
             this.lblAmount.Text = "labelSoZostakom";
             // 
-            // dateTimePicker1
+            // dtpCreationDate
             // 
-            this.dateTimePicker1.Enabled = false;
-            this.dateTimePicker1.Location = new System.Drawing.Point(12, 232);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(184, 20);
-            this.dateTimePicker1.TabIndex = 11;
+            this.dtpCreationDate.Enabled = false;
+            this.dtpCreationDate.Location = new System.Drawing.Point(12, 232);
+            this.dtpCreationDate.Name = "dtpCreationDate";
+            this.dtpCreationDate.Size = new System.Drawing.Size(184, 20);
+            this.dtpCreationDate.TabIndex = 11;
             // 
             // lblCreationDate
             // 
@@ -215,11 +210,43 @@
             this.lblCreationDate.TabIndex = 12;
             this.lblCreationDate.Text = "Creation date";
             // 
+            // btnOk
+            // 
+            this.btnOk.Location = new System.Drawing.Point(519, 233);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.TabIndex = 25;
+            this.btnOk.Text = "Ok";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(431, 233);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 26;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // lblAcutalOverFlowValue
+            // 
+            this.lblAcutalOverFlowValue.AutoSize = true;
+            this.lblAcutalOverFlowValue.Location = new System.Drawing.Point(13, 132);
+            this.lblAcutalOverFlowValue.Name = "lblAcutalOverFlowValue";
+            this.lblAcutalOverFlowValue.Size = new System.Drawing.Size(35, 13);
+            this.lblAcutalOverFlowValue.TabIndex = 27;
+            this.lblAcutalOverFlowValue.Text = "label1";
+            // 
             // frmAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(604, 261);
+            this.Controls.Add(this.lblAcutalOverFlowValue);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnOk);
             this.Controls.Add(this.txtIdNumber);
             this.Controls.Add(this.lblIdNumber);
             this.Controls.Add(this.txtPostalCode);
@@ -233,11 +260,10 @@
             this.Controls.Add(this.lblLastName);
             this.Controls.Add(this.lblFirstName);
             this.Controls.Add(this.lblCreationDate);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtpCreationDate);
             this.Controls.Add(this.lblAmount);
             this.Controls.Add(this.lblIBAN);
             this.Controls.Add(this.txtOverFlowLimit);
-            this.Controls.Add(this.txtAcutalOverflow);
             this.Controls.Add(this.lblOverFlowLimit);
             this.Controls.Add(this.lblActualOverflow);
             this.Name = "frmAccount";
@@ -264,11 +290,13 @@
         private System.Windows.Forms.TextBox txtIdNumber;
         private System.Windows.Forms.Label lblActualOverflow;
         private System.Windows.Forms.Label lblOverFlowLimit;
-        private System.Windows.Forms.TextBox txtAcutalOverflow;
         private System.Windows.Forms.TextBox txtOverFlowLimit;
         private System.Windows.Forms.Label lblIBAN;
         private System.Windows.Forms.Label lblAmount;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpCreationDate;
         private System.Windows.Forms.Label lblCreationDate;
+        private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label lblAcutalOverFlowValue;
     }
 }

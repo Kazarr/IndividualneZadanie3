@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Data.Models;
 using Data.Repositories;
 
 namespace BankSystem
@@ -12,9 +13,9 @@ namespace BankSystem
     {
         private AccountRepository _accountRepository { get; set; }
 
-        public DataSet LoadAccounts()
-        {
-            return _accountRepository.LoadAccount();
-        }
+        //public Account LoadAccounts()
+        //{
+        //    return _accountRepository.LoadAccount();
+        //}
     }
 }

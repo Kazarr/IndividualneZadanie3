@@ -12,6 +12,8 @@ namespace BankSystem
 {
     public partial class frmClientManagement : Form
     {
+        private string _pattern;
+        private int _accountId;
         public ClientManagmentViewModel ClientManagmentViewModel { get; set; }
 
         /// <summary>
@@ -26,16 +28,24 @@ namespace BankSystem
         public frmClientManagement(string pattern)
         {
             InitializeComponent();
+            _pattern = pattern;
             ClientManagmentViewModel = new ClientManagmentViewModel();
-            dgvAccount.DataSource = ClientManagmentViewModel.LoadInfo(pattern);
+            dgvAccount.DataSource = ClientManagmentViewModel.LoadInfo(_pattern);
             dgvAccount.DataMember = "Account";
+            dgvAccount.Columns["Id"].Visible = false;
         }
 
         private void cmdUpdate_Click(object sender, EventArgs e)
         {
-            using (frmAccount newForm = new frmAccount(42))
+            using (frmAccount newForm = new frmAccount(_accountId))
             {
                 newForm.ShowDialog();
+                if(newForm.DialogResult == DialogResult.OK)
+                {
+                    dgvAccount.DataSource = ClientManagmentViewModel.LoadInfo(_pattern);
+                    dgvAccount.DataMember = "Account";
+                    dgvAccount.Columns["Id"].Visible = false;
+                }
             }
         }
 
@@ -77,6 +87,11 @@ namespace BankSystem
             {
                 DialogResult = DialogResult.OK;
             }
+        }
+
+        private void dgvAccount_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            _accountId = (int)dgvAccount.Rows[0].Cells[0].Value;
         }
     }
 }

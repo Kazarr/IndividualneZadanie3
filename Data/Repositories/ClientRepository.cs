@@ -37,6 +37,78 @@ namespace Data.Repositories
                 }
             }
         }
+        public Client LoadClient(int idClient)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"SELECT * FROM Client WHERE Id = @IdClient";
+                        command.Parameters.Add("@IdClient", SqlDbType.VarChar).Value = idClient;
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int clienId = reader.GetInt32(0);
+                                string firstName = reader.GetString(1);
+                                string lastname = reader.GetString(2);
+                                string adress = reader.GetString(3);
+                                int idCity = reader.GetInt32(4);
+                                string idNumber = reader.GetString(5);
+                                return new Client(clienId, firstName, lastname, adress, idCity, idNumber);
+                            }
+                            else { throw new Exception("You dont have anything to read"); }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+        public bool UpdateClient(Client client)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"UPDATE Client
+                                                SET FirstName = @FirstName,
+                                                    LastName = @LastName,
+                                                    Adress = @Adress,
+                                                    IdNumber = IdNumber
+                                                WHERE Id = @IdClient";
+                        command.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = client.FirstName;
+                        command.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = client.LastName;
+                        command.Parameters.Add("@Adress", SqlDbType.NVarChar).Value = client.Adress;
+                        command.Parameters.Add("@IdClient", SqlDbType.Int).Value = client.Id;
+                        if (command.ExecuteNonQuery() > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+
         public bool FindClientById(int id)
         {
             using (base.Connection)
@@ -141,40 +213,7 @@ namespace Data.Repositories
             }
             return false;
         }
-        public Client GetClientById(int id)
-        {
-            using (base.Connection)
-            {
-                try
-                {
-                    base.Connection.Open();
-                    using (SqlCommand command = new SqlCommand())
-                    {
-                        command.Connection = base.Connection;
-                        command.CommandText = @"SELECT * FROM Client WHERE Id = @Id";
-                        command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
-
-                        using(SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                int clienId = reader.GetInt32(0);
-                                string firstName = reader.GetString(1);
-                                string lastname = reader.GetString(2);
-                                string adress = reader.GetString(3);
-                                string idNumber = reader.GetString(4);
-                                return new Client(clienId, firstName, lastname, adress, idNumber);
-                            }
-                            else { throw new Exception("You dont have anything to read"); }
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    throw;
-                }
-            }
-        }
+        
 
 
     }

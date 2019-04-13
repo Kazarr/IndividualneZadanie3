@@ -17,7 +17,7 @@ namespace BankSystem
         public frmAccounts()
         {
             InitializeComponent();
-            dgvAccounts.DataSource = AccountsViewModel.LoadAccounts();
+            //dgvAccounts.DataSource = AccountsViewModel.LoadAccounts();
             dgvAccounts.DataMember = "Account";
             dgvAccounts.Columns[0].Visible = false;
         }

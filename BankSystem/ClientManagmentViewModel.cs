@@ -21,5 +21,10 @@ namespace BankSystem
         {
             return ClientManagmentRepository.LoadClientManagment(pattern);
         }
+
+        //public void UpdateInfo(int idAccount, int idClient, decimal overFlowLimit, string firstName, string lastName, string adress, string cityName, string postalCode, string IdNumber)
+        //{
+        //    ClientManagmentRepository.SaveClientManagment(idAccount, idClient, overFlowLimit, firstName, lastName, adress, cityName, postalCode, IdNumber);
+        //}
     }
 }

@@ -20,7 +20,7 @@ namespace Data.Repositories
                     using (SqlCommand command = new SqlCommand())
                     {
                         command.Connection = connection;
-                        command.CommandText = @"SELECT CreationDate, ExpireDate, FirstName, LastName, Amount, IBAN, ActualOverFlow, OverFlowLimit FROM Account as a
+                        command.CommandText = @"SELECT a.id, CreationDate, ExpireDate, FirstName, LastName, Amount, IBAN, ActualOverFlow, OverFlowLimit FROM Account as a
                                                 JOIN Client as c on a.Id_Client = c.id
                                                 WHERE IdNumber = @IdNumber";
                         command.Parameters.Add("@IdNumber", SqlDbType.VarChar).Value = pattern;
@@ -37,6 +37,27 @@ namespace Data.Repositories
                 {
                     throw;
                 }
+            }
+        }
+        public void SaveClientManagment(decimal overFlowLimit, string firstName, string lastName, string adress, string cityName, string postalCodee, string IdNumber)
+        {
+            using(SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using(SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"update Account
+                                                set OverFlowLimit = @OverFlowLimit
+                                                where ";
+                    }
+                }catch(Exception e)
+                {
+
+                }
+                
             }
         }
     }

@@ -20,7 +20,7 @@ namespace Data.Models
         }
 
         public int Id { get; private set; }
-        public string Name { get; private set; }
-        public string PostalCode { get; private set; }
+        public string Name { get; set; }
+        public string PostalCode { get; set; }
     }
 }

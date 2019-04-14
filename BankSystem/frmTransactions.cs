@@ -34,6 +34,7 @@ namespace BankSystem
             _transactionViewModel = new TransactionsViewModel();
             dgvTransactions.DataSource = _transactionViewModel.LoadClientTransactions(accountId);
             dgvTransactions.DataMember = "Transactions";
+            dgvTransactions.Columns["Id"].Visible = false;
         }
     }
 }

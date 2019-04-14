@@ -60,8 +60,10 @@ namespace Data.Repositories
                     {
                         command.Connection = connection;
                         command.CommandText = @"UPDATE Account
-                                                SET OverFlowLimit = @OverFlowLimit";
+                                                SET OverFlowLimit = @OverFlowLimit
+                                                WHERE Id = @Id";
                         command.Parameters.Add("@OverFlowlimit", SqlDbType.Decimal).Value = account.OverFlowLimit;
+                        command.Parameters.Add("Id", SqlDbType.Int).Value = account.Id;
                         if (command.ExecuteNonQuery() > 0)
                         {
                             return true;
@@ -91,6 +93,44 @@ namespace Data.Repositories
                                                 VALUES (@IdClient, 1, @Iban)";
                         command.Parameters.Add("@IdClient", SqlDbType.Int).Value = account.IdClient;
                         command.Parameters.Add("@Iban", SqlDbType.VarChar).Value = account.IBAN;
+                        if (command.ExecuteNonQuery() > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+        public bool UpdateAccountAmount(Account account)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"update Account 
+                                                set account.Amount =  account.Amount + (select top 1 case 
+										                                                when t.[TypeTransaction] = 'W' then t.Amount * (-1) 
+										                                                else t.Amount
+										                                                end
+										                                                from [Transaction] as t
+										                                                JOIN AccountTransaction as act 
+										                                                ON t.Id = act.Id_Transaction
+										                                                WHERE act.Id_DestinationAccount = 6 OR act.Id_Account = 6
+										                                                ORDER BY t.Id desc)
+                                                where id = @Id";
+                        command.Parameters.Add("@Id", SqlDbType.Int).Value = account.Id;
                         if (command.ExecuteNonQuery() > 0)
                         {
                             return true;

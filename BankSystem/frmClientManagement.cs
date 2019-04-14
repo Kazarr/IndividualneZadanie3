@@ -15,6 +15,7 @@ namespace BankSystem
         private string _pattern;
         private int _accountId;
         private int _cardId;
+        bool deposit;
         private ClientManagmentViewModel _clientManagmentViewModel { get; set; }
 
         /// <summary>
@@ -34,6 +35,8 @@ namespace BankSystem
             dgvAccount.DataSource = _clientManagmentViewModel.LoadClientManagment(_pattern);
             dgvAccount.DataMember = "Account";
             _accountId = (int)dgvAccount.Rows[0].Cells[0].Value;
+            _clientManagmentViewModel.SetAccountId(_accountId);
+
             dgvAccount.Columns["Id"].Visible = false;
 
             dgvCards.DataSource = _clientManagmentViewModel.LoadCards(_accountId);
@@ -59,17 +62,29 @@ namespace BankSystem
 
         private void cmdDeposit_Click(object sender, EventArgs e)
         {
-            using (frmTransaction newForm = new frmTransaction())
+            deposit = true;
+            using (frmTransaction newForm = new frmTransaction(_accountId, deposit))
             {
                 newForm.ShowDialog();
+                if(newForm.DialogResult == DialogResult.OK)
+                {
+                    _clientManagmentViewModel.UpdateAccountAmount();
+                    dgvAccount.DataSource = _clientManagmentViewModel.LoadUpdatedClientManagment(_accountId);
+                }
             }
         }
 
         private void cmdWithdrawal_Click(object sender, EventArgs e)
         {
-            using (frmTransaction newForm = new frmTransaction())
+            deposit = false;
+            using (frmTransaction newForm = new frmTransaction(_accountId, deposit))
             {
                 newForm.ShowDialog();
+                if(newForm.DialogResult == DialogResult.OK)
+                {
+                    _clientManagmentViewModel.UpdateAccountAmount();
+                    dgvAccount.DataSource = _clientManagmentViewModel.LoadUpdatedClientManagment(_accountId);
+                }
             }
         }
 

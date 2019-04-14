@@ -13,15 +13,21 @@ namespace BankSystem
     {
         private ClientManagmentRepository _clientManagmentRepository { get; set; }
         private CardRepository _cardRepository { get; set; }
+        private AccountRepository _accountRepository { get; set; }
         private Card _card { get; set; }
         private Client _client { get; set; }
         private Account _account { get; set; }
+        private Transaction _transaction { get; set; }
 
         public ClientManagmentViewModel()
         {
             _clientManagmentRepository = new ClientManagmentRepository();
             _cardRepository = new CardRepository();
+            _accountRepository = new AccountRepository();
             _card = new Card();
+            _client = new Client();
+            _account = new Account();
+            _transaction = new Transaction();
         }
 
         public DataSet LoadClientManagment(string pattern)
@@ -51,6 +57,15 @@ namespace BankSystem
             _card.Id_Account = accountId;
             _card.Id = cardId;
             _cardRepository.UpdateCard(_card);
+        }
+        public void UpdateAccountAmount()
+        {
+            _accountRepository.UpdateAccountAmount(_account);
+        }
+
+        public void SetAccountId(int id)
+        {
+            _account.Id = id;
         }
     }
 }

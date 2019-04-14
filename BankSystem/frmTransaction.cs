@@ -22,6 +22,7 @@ namespace BankSystem
             _transactionsViewModel = new TransactionsViewModel();
             btnDone.Visible = true;
             btnOk.Visible = false;
+
         }
 
         public frmTransaction(int accountId, bool deposit)

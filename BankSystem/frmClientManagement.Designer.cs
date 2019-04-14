@@ -224,6 +224,7 @@
             // 
             // btnCloseCard
             // 
+            this.btnCloseCard.Enabled = false;
             this.btnCloseCard.Location = new System.Drawing.Point(749, 344);
             this.btnCloseCard.Name = "btnCloseCard";
             this.btnCloseCard.Size = new System.Drawing.Size(75, 23);

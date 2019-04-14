@@ -46,11 +46,11 @@ namespace BankSystem
             _card.Pin = r.Next(0, 10000).ToString();
             _card.Id = _cardRepository.InsertCard(_card);
         }
-        public void UpdateCard(int accountId)
+        public void UpdateCard(int accountId, int cardId)
         {
+            _card.Id_Account = accountId;
+            _card.Id = cardId;
             _cardRepository.UpdateCard(_card);
         }
-
-
     }
 }

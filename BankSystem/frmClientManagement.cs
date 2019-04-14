@@ -14,6 +14,7 @@ namespace BankSystem
     {
         private string _pattern;
         private int _accountId;
+        private int _cardId;
         private ClientManagmentViewModel _clientManagmentViewModel { get; set; }
 
         /// <summary>
@@ -37,7 +38,9 @@ namespace BankSystem
 
             dgvCards.DataSource = _clientManagmentViewModel.LoadCards(_accountId);
             dgvCards.DataMember = "Card";
+            _cardId = (int)dgvCards.Rows[0].Cells[0].Value;
             dgvCards.Columns["Id"].Visible = false;
+            btnCloseCard.Enabled = false;
         }
 
         private void cmdUpdate_Click(object sender, EventArgs e)
@@ -109,7 +112,7 @@ namespace BankSystem
 
         private void btnCloseCard_Click(object sender, EventArgs e)
         {
-            _clientManagmentViewModel.UpdateCard(_accountId);
+            _clientManagmentViewModel.UpdateCard(_accountId, _cardId);
 
             dgvCards.DataSource = _clientManagmentViewModel.LoadCards(_accountId);
             dgvCards.DataMember = "Card";
@@ -117,7 +120,9 @@ namespace BankSystem
 
         private void dgvCards_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            //_clientManagmentViewModel.
+            _cardId = (int)dgvCards.Rows[e.RowIndex].Cells[0].Value;
+            btnCloseCard.Enabled = true;
+            
         }
     }
 }

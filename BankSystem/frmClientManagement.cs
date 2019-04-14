@@ -75,7 +75,7 @@ namespace BankSystem
 
         private void cmdAllTransactions_Click(object sender, EventArgs e)
         {
-            using (frmTransactions newForm = new frmTransactions(42))
+            using (frmTransactions newForm = new frmTransactions(_accountId))
             {
                 newForm.ShowDialog();
             }

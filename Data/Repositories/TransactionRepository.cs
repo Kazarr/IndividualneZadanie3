@@ -157,38 +157,6 @@ namespace Data.Repositories
             }
         }
 
-        //public bool AccountTransaction(Transaction transaction, int accountId, int desinationAccountId)
-        //{
-        //    using (SqlConnection connection = base.Connection)
-        //    {
-        //        try
-        //        {
-        //            connection.Open();
-        //            using (SqlCommand command = new SqlCommand())
-        //            {
-        //                command.Connection = connection;
-        //                command.CommandText = @"INSERT INTO [AccountTransaction] (Id_Account, Id_DestinationAccount, Id_Transaction)
-        //                                        VALUES (@Id_account, @Id_DestinationAccount, @Id_Transaction)";
-        //                command.Parameters.Add("@Id_account", SqlDbType.Decimal).Value = accountId;
-        //                command.Parameters.Add("@Id_DestinationAccount", SqlDbType.Char).Value = desinationAccountId;
-        //                command.Parameters.Add("@Id_Transaction", SqlDbType.Char).Value = transaction.Id;
-        //                if(command.ExecuteNonQuery() > 0)
-        //                {
-        //                    return true;
-        //                }
-        //                else
-        //                {
-        //                    return false;
-        //                }
-        //            }
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            throw;
-        //        }
-        //    }
-        //}
-
         public bool AccountDeposit(Transaction transaction, int desinationAccountId)
         {
             using (SqlConnection connection = base.Connection)
@@ -275,6 +243,60 @@ namespace Data.Repositories
                 }
             }
         }
-
+        public int InsertATMTransaction(int amount)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"INSERT INTO [Transaction] (Amount, TypeTransaction)
+                                                OUTPUT INSERTED.Id
+                                                VALUES (@Amount, @TypeTransaction)";
+                        command.Parameters.Add("@Amount", SqlDbType.Decimal).Value = amount;
+                        command.Parameters.Add("@TypeTransaction", SqlDbType.Char).Value = 'W';
+                        return (int)command.ExecuteScalar();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+        public bool InsertATMAccountTransaction(int accountId, int idTransaction)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"INSERT INTO [AccountTransaction] (Id_Account, Id_Transaction)
+                                                OUTPUT INSERTED.Id
+                                                VALUES (@Id_Account, @Id_Transaction)";
+                        command.Parameters.Add("@Id_Account", SqlDbType.Int).Value = accountId;
+                        command.Parameters.Add("@Id_Transaction", SqlDbType.Int).Value = idTransaction;
+                        if(command.ExecuteNonQuery() > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }

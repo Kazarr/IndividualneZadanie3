@@ -38,6 +38,29 @@ namespace Data.Repositories
                 }
             }
         }
+
+        public DateTime GetCardExpireDate(int cardId)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"select ExpireDate from Card where id = @id";
+                        command.Parameters.Add("@id", SqlDbType.Int).Value = cardId;
+                        return (DateTime)command.ExecuteScalar();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+
         public int InsertCard(Card card)
         {
             using (SqlConnection connection = base.Connection)
@@ -103,8 +126,8 @@ namespace Data.Repositories
                     using (SqlCommand command = new SqlCommand())
                     {
                         command.Connection = connection;
-                        command.CommandText = @"select Pin from Card where number = @number";
-                        command.Parameters.Add("@number", SqlDbType.Int).Value = cardId;
+                        command.CommandText = @"select Pin from Card where id = @id";
+                        command.Parameters.Add("@id", SqlDbType.Int).Value = cardId;
                         return (string)command.ExecuteScalar();
                     }
                 }

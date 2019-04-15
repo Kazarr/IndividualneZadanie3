@@ -46,6 +46,7 @@
             this.btn5.TabIndex = 0;
             this.btn5.Text = "5";
             this.btn5.UseVisualStyleBackColor = true;
+            this.btn5.Click += new System.EventHandler(this.btn5_Click);
             // 
             // btn10
             // 
@@ -55,6 +56,7 @@
             this.btn10.TabIndex = 1;
             this.btn10.Text = "10";
             this.btn10.UseVisualStyleBackColor = true;
+            this.btn10.Click += new System.EventHandler(this.btn10_Click);
             // 
             // btn20
             // 
@@ -64,6 +66,7 @@
             this.btn20.TabIndex = 2;
             this.btn20.Text = "20";
             this.btn20.UseVisualStyleBackColor = true;
+            this.btn20.Click += new System.EventHandler(this.btn20_Click);
             // 
             // btn50
             // 
@@ -73,6 +76,7 @@
             this.btn50.TabIndex = 3;
             this.btn50.Text = "50";
             this.btn50.UseVisualStyleBackColor = true;
+            this.btn50.Click += new System.EventHandler(this.btn50_Click);
             // 
             // btn100
             // 
@@ -82,6 +86,7 @@
             this.btn100.TabIndex = 4;
             this.btn100.Text = "100";
             this.btn100.UseVisualStyleBackColor = true;
+            this.btn100.Click += new System.EventHandler(this.btn100_Click);
             // 
             // btn200
             // 
@@ -91,6 +96,7 @@
             this.btn200.TabIndex = 5;
             this.btn200.Text = "200";
             this.btn200.UseVisualStyleBackColor = true;
+            this.btn200.Click += new System.EventHandler(this.btn200_Click);
             // 
             // btn500
             // 
@@ -100,6 +106,7 @@
             this.btn500.TabIndex = 6;
             this.btn500.Text = "500";
             this.btn500.UseVisualStyleBackColor = true;
+            this.btn500.Click += new System.EventHandler(this.btn500_Click);
             // 
             // btnCustom
             // 

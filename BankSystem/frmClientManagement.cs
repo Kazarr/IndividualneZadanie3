@@ -155,5 +155,10 @@ namespace BankSystem
         {
             dgvAccount.DataSource = _clientManagmentViewModel.LoadUpdatedClientManagment(_clientManagmentViewModel.Account.Id);
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            dgvAccount.DataSource = _clientManagmentViewModel.LoadUpdatedClientManagment(_clientManagmentViewModel.Account.Id);
+        }
     }
 }

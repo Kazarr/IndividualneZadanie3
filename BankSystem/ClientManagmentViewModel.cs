@@ -70,5 +70,9 @@ namespace BankSystem
         {
             Account.Id = id;
         }
+        public bool CloseAccount()
+        {
+            return _accountRepository.CloseAccount(Account);
+        }
     }
 }

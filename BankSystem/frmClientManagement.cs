@@ -117,6 +117,7 @@ namespace BankSystem
         {
             if (MessageBox.Show("Hodor?", "Hodor!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
+                _clientManagmentViewModel.CloseAccount();
                 DialogResult = DialogResult.OK;
             }
         }

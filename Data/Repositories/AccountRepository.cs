@@ -91,6 +91,37 @@ namespace Data.Repositories
             }
         }
 
+        public bool CloseAccount(Account account)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"UPDATE Account
+                                                SET ExpireDate = GETDATE()
+                                                WHERE Id = @Id";
+                        command.Parameters.Add("Id", SqlDbType.Int).Value = account.Id;
+                        if (command.ExecuteNonQuery() > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+
         public int FinAccountIdByCardId(int idCard)
         {
             using (SqlConnection connection = base.Connection)

@@ -49,6 +49,31 @@ namespace Data.Repositories
             }
             //return null;
         }
+
+        public int FinAccountIdByCardId(int idCard)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"select c.Id_Account from [Card] as c
+                                                join Account as a on c.Id_Account =a.id
+                                                where c.id = @id";
+                        command.Parameters.Add("@id", SqlDbType.Int).Value = idCard;
+                        return (int)command.ExecuteScalar();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+
         public bool UpdateAccountOverFlowLimit(Account account)
         {
             using(SqlConnection connection = base.Connection)

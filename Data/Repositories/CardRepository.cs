@@ -93,5 +93,26 @@ namespace Data.Repositories
                 }
             }
         }
+        public string GetCardPin(int cardId)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"select Pin from Card where number = @number";
+                        command.Parameters.Add("@number", SqlDbType.Int).Value = cardId;
+                        return (string)command.ExecuteScalar();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }

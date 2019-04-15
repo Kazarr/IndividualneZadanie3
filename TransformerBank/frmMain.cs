@@ -12,9 +12,28 @@ namespace TransformerBank
 {
     public partial class frmMain : Form
     {
+        private MainViewModel _mainViewModel;
         public frmMain()
         {
             InitializeComponent();
+            _mainViewModel = new MainViewModel();
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+
+            int cardId;
+            if(int.TryParse(txtCardNumber.Text, out cardId))
+            {
+                if(_mainViewModel.Login(cardId, txtPin.Text))
+                {
+                    using (frmWithdrawal newform = new frmWithdrawal(cardId))
+                    {
+                        newform.ShowDialog();
+                    }
+                }
+            }
+            
         }
     }
 }

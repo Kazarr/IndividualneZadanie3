@@ -98,6 +98,7 @@
             this.dgvAccounts.Name = "dgvAccounts";
             this.dgvAccounts.Size = new System.Drawing.Size(560, 164);
             this.dgvAccounts.TabIndex = 16;
+            this.dgvAccounts.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccounts_RowEnter);
             // 
             // frmAccounts
             // 

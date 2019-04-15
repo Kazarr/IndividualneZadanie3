@@ -13,9 +13,18 @@ namespace BankSystem
     {
         private AccountRepository _accountRepository { get; set; }
 
-        //public Account LoadAccounts()
-        //{
-        //    return _accountRepository.LoadAccount();
-        //}
+        public AccountsViewModel()
+        {
+            _accountRepository = new AccountRepository();
+        }
+
+        public DataSet LoadAccounts()
+        {
+            return _accountRepository.LoadAccounts();
+        }
+        public string LoadClientIdNumber(int accountId)
+        {
+            return _accountRepository.LoadIdNubmer(accountId);
+        }
     }
 }

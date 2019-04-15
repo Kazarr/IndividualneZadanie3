@@ -50,6 +50,63 @@ namespace Data.Repositories
             }
         }
 
+        public bool InsertAccountTransaction(int transactionId, int accountId, int destinationAccountId)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"INSERT INTO [AccountTransaction] (Id_Account, Id_DestinationAccount, Id_Transaction)
+                                                VALUES (@Id_account, @Id_DestinationAccount, @Id_Transaction)";
+                        command.Parameters.Add("@Id_account", SqlDbType.Decimal).Value = accountId;
+                        command.Parameters.Add("@Id_DestinationAccount", SqlDbType.Char).Value = destinationAccountId;
+                        command.Parameters.Add("@Id_Transaction", SqlDbType.Char).Value = transactionId;
+                        if (command.ExecuteNonQuery() > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+
+        public int InsertTransaction(Transaction transaction)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"INSERT INTO [Transaction] (Amount, TypeTransaction)
+                                                OUTPUT INSERTED.Id
+                                                VALUES (@Amount, @TypeTransaction)";
+                        command.Parameters.Add("@Amount", SqlDbType.Decimal).Value = transaction.Amount;
+                        command.Parameters.Add("@TypeTransaction", SqlDbType.Char).Value = transaction.TypeTransaction;
+                        return (int)command.ExecuteScalar();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+
         public int Withdrawal(Transaction transaction)
         {
             using (SqlConnection connection = base.Connection)
@@ -102,7 +159,34 @@ namespace Data.Repositories
 
         //public bool AccountTransaction(Transaction transaction, int accountId, int desinationAccountId)
         //{
-
+        //    using (SqlConnection connection = base.Connection)
+        //    {
+        //        try
+        //        {
+        //            connection.Open();
+        //            using (SqlCommand command = new SqlCommand())
+        //            {
+        //                command.Connection = connection;
+        //                command.CommandText = @"INSERT INTO [AccountTransaction] (Id_Account, Id_DestinationAccount, Id_Transaction)
+        //                                        VALUES (@Id_account, @Id_DestinationAccount, @Id_Transaction)";
+        //                command.Parameters.Add("@Id_account", SqlDbType.Decimal).Value = accountId;
+        //                command.Parameters.Add("@Id_DestinationAccount", SqlDbType.Char).Value = desinationAccountId;
+        //                command.Parameters.Add("@Id_Transaction", SqlDbType.Char).Value = transaction.Id;
+        //                if(command.ExecuteNonQuery() > 0)
+        //                {
+        //                    return true;
+        //                }
+        //                else
+        //                {
+        //                    return false;
+        //                }
+        //            }
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            throw;
+        //        }
+        //    }
         //}
 
         public bool AccountDeposit(Transaction transaction, int desinationAccountId)

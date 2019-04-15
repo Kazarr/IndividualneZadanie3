@@ -15,14 +15,15 @@ namespace BankSystem
     {
         private TransactionsViewModel _transactionsViewModel;
         private int _accountId;
+        private int _destinationAccountId;
         private bool _deposit;
-        public frmTransaction()
+        public frmTransaction(int accountId)
         {
             InitializeComponent();
             _transactionsViewModel = new TransactionsViewModel();
             btnDone.Visible = true;
             btnOk.Visible = false;
-
+            _accountId = accountId;
         }
 
         public frmTransaction(int accountId, bool deposit)
@@ -102,7 +103,13 @@ namespace BankSystem
 
         private void btnDone_Click(object sender, EventArgs e)
         {
-
+            int amount;
+            if(int.TryParse(txtAmount.Text, out amount))
+            {
+                _transactionsViewModel.InsertTransaction(amount, _accountId, _transactionsViewModel.FindAccountByIban(txtIban.Text));
+            }
+            this.DialogResult = DialogResult.OK;
+            Close();
         }
     }
 }

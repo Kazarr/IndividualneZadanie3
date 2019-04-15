@@ -17,7 +17,9 @@ namespace BankSystem
         private Card _card { get; set; }
         private Client _client { get; set; }
         private Account _account { get; set; }
+        private Account _destinationAccount { get; set; }
         private Transaction _transaction { get; set; }
+        //private string _iban { get; set; }
 
         public ClientManagmentViewModel()
         {

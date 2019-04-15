@@ -10,6 +10,6 @@ namespace Data.Repositories
     public class MyConnection
     {
         public SqlConnection Connection { get { return new SqlConnection(CONNECTION_STRING); } set{ } }
-        private const string CONNECTION_STRING = @"Server=DESKTOP-TAM7PVR\SQLEXPRESS;Database=BankSystem;Trusted_Connection=True";
+        private const string CONNECTION_STRING = @"Server=kardos\sqlexpresskardy;Database=BankSystem;Trusted_Connection=True";
     }
 }

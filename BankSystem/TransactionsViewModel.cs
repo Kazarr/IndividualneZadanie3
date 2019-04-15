@@ -12,13 +12,18 @@ namespace BankSystem
     public class TransactionsViewModel
     {
         private Account _account;
+        private Account _destinationAccount;
         private Transaction _transaction;
         private TransactionRepository _transactionRepository;
+        private AccountRepository _accountRepository;
 
         public TransactionsViewModel()
         {
             _transactionRepository = new TransactionRepository();
             _account = new Account();
+            _accountRepository = new AccountRepository();
+            _transaction = new Transaction();
+            _destinationAccount = new Account();
         }
 
         public DataSet LoadAllTransactions()
@@ -51,6 +56,21 @@ namespace BankSystem
 
             _transaction.Id =_transactionRepository.Withdrawal(_transaction);
             _transactionRepository.AccountWithdrawal(_transaction, _account.Id);
+        }
+        public int FindAccountByIban(string iban)
+        {
+            return _accountRepository.FindAccountIdByIban(iban);
+        }
+        public void InsertTransaction(int amount,int accountId, int destinationAccountId)
+        {
+            _transaction.Amount = amount;
+            _transaction.TypeTransaction = 'T';
+            _transaction.Id = _transactionRepository.InsertTransaction(_transaction);
+            _transactionRepository.InsertAccountTransaction(_transaction.Id, accountId, destinationAccountId);
+            _account.Id = accountId;
+            _destinationAccount.Id = destinationAccountId;
+            _accountRepository.UpdateSourceAccountAmount(_account);
+            _accountRepository.UpdateDestinationAccountAmount(_destinationAccount);
         }
     }
 }

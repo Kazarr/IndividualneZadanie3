@@ -39,11 +39,16 @@ namespace BankSystem
 
             dgvAccount.Columns["Id"].Visible = false;
 
+
             dgvCards.DataSource = _clientManagmentViewModel.LoadCards(_accountId);
             dgvCards.DataMember = "Card";
-            _cardId = (int)dgvCards.Rows[0].Cells[0].Value;
-            dgvCards.Columns["Id"].Visible = false;
-            btnCloseCard.Enabled = false;
+
+            if(dgvCards.Rows.Count != 0)
+            {
+                _cardId = (int)dgvCards.Rows[0].Cells[0].Value;
+                dgvCards.Columns["Id"].Visible = false;
+                btnCloseCard.Enabled = false;
+            }
         }
 
         private void cmdUpdate_Click(object sender, EventArgs e)
@@ -98,7 +103,7 @@ namespace BankSystem
 
         private void cmdNewTransaction_Click(object sender, EventArgs e)
         {
-            using (frmTransaction newForm = new frmTransaction())
+            using (frmTransaction newForm = new frmTransaction(_accountId))
             {
                 newForm.ShowDialog();
             }

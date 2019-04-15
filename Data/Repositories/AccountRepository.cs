@@ -127,7 +127,7 @@ namespace Data.Repositories
 										                                                from [Transaction] as t
 										                                                JOIN AccountTransaction as act 
 										                                                ON t.Id = act.Id_Transaction
-										                                                WHERE act.Id_DestinationAccount = 6 OR act.Id_Account = 6
+										                                                WHERE act.Id_DestinationAccount = @Id OR act.Id_Account = @Id
 										                                                ORDER BY t.Id desc)
                                                 where id = @Id";
                         command.Parameters.Add("@Id", SqlDbType.Int).Value = account.Id;
@@ -139,6 +139,146 @@ namespace Data.Repositories
                         {
                             return false;
                         }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+        public bool UpdateSourceAccountAmount(Account account)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"update Account 
+                                              set account.amount = account.amount - 
+                                                                (select top 1 amount from [Transaction] as t
+		                                                            join AccountTransaction as act on t.id = act.Id_Transaction
+		                                                            where act.id_account = @Id
+		                                                            order by t.id desc)
+                                            where account.id = @Id";
+                        command.Parameters.Add("@Id", SqlDbType.Int).Value = account.Id;
+                        if(command.ExecuteNonQuery() > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+        public bool UpdateDestinationAccountAmount(Account account)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"update Account 
+                                              set account.amount = account.amount + 
+                                                                (select top 1 amount from [Transaction] as t
+		                                                            join AccountTransaction as act on t.id = act.Id_Transaction
+		                                                            where act.id_account = @Id
+		                                                            order by t.id desc)
+                                            where account.id = @Id";
+                        command.Parameters.Add("@Id", SqlDbType.Int).Value = account.Id;
+                        if (command.ExecuteNonQuery() > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+        public int FindAccountIdByIban(string Iban)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"SELECT Id FROM Account WHERE Iban = @iban";
+                        command.Parameters.Add("@iban", SqlDbType.VarChar).Value = Iban;
+                        return (int)command.ExecuteScalar();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+        public DataSet LoadAccounts()
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"select c.Id, c.Firstname, c.LastName, c.Adress, c.IdNumber, ct.Name, ct.PostalCode from client as c
+                                                join city as ct on c.Id_City = ct.Id";
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            DataSet ds = new DataSet();
+                            adapter.Fill(ds, "Account");
+                            DataTable dt = ds.Tables["Account"];
+
+                            return ds;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+        public string LoadIdNubmer(int accountId)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"  select IdNumber from Account as a 
+                                                  join Client as c on a.Id_Client = c.id
+                                                  where a.id = @Id";
+                        command.Parameters.Add("@Id", SqlDbType.Int).Value = accountId;
+                        return (string)command.ExecuteScalar();
                     }
                 }
                 catch (Exception e)

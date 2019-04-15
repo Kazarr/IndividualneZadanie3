@@ -84,6 +84,11 @@ namespace BankSystem
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            decimal overFlowLimit;
+            if (decimal.TryParse(txtOverFlowLimit.Text, out overFlowLimit))
+            {
+                _accountViewModel.SetAccountOverFlowLimit(overFlowLimit);
+            }
             _accountViewModel.SetAccountIban(lblIBAN.Text);
 
             _accountViewModel.SetClientFirstName(txtFirstName.Text);
@@ -97,8 +102,8 @@ namespace BankSystem
             _accountViewModel.InsertCity();
             _accountViewModel.InserClient();
             _accountViewModel.InsertAccount();
-            
 
+            Close();
         }
     }
 }

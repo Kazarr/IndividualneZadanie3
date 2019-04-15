@@ -21,7 +21,7 @@ namespace Data.Repositories
                     using (SqlCommand command = new SqlCommand())
                     {
                         command.Connection = connection;
-                        command.CommandText = @"SELECT Id, Number, DailyLimit, ExpireDate FROM Card WHERE Id_Account = @Id_Account";
+                        command.CommandText = @"SELECT Id, Number, DailyLimit, ExpireDate, Pin FROM Card WHERE Id_Account = @Id_Account";
                         command.Parameters.Add("@Id_Account", SqlDbType.Int).Value = accountId;
                         using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                         {

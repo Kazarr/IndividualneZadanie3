@@ -155,10 +155,11 @@ namespace Data.Repositories
                     using (SqlCommand command = new SqlCommand())
                     {
                         command.Connection = connection;
-                        command.CommandText = @"INSERT INTO Account (Id_Client, Id_Bank, Iban)
-                                                VALUES (@IdClient, 1, @Iban)";
+                        command.CommandText = @"INSERT INTO Account (Id_Client, Id_Bank, Iban, OverFlowLimit)
+                                                VALUES (@IdClient, 1, @Iban, @OverFlowLimit)";
                         command.Parameters.Add("@IdClient", SqlDbType.Int).Value = account.IdClient;
                         command.Parameters.Add("@Iban", SqlDbType.VarChar).Value = account.IBAN;
+                        command.Parameters.Add("@OverFlowLimit", SqlDbType.VarChar).Value = account.OverFlowLimit;
                         if (command.ExecuteNonQuery() > 0)
                         {
                             return true;

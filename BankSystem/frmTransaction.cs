@@ -15,7 +15,7 @@ namespace BankSystem
     {
         private TransactionsViewModel _transactionsViewModel;
         private int _accountId;
-        private int _destinationAccountId;
+        //private int _destinationAccountId;
         private bool _deposit;
         public frmTransaction(int accountId)
         {
@@ -36,9 +36,11 @@ namespace BankSystem
             btnDone.Visible = false;
             if (deposit)
             {
+                #region Visibility
                 lblIbanSend.Visible = false;
                 lblFirstNameSend.Visible = false;
                 lblLastNameSend.Visible = false;
+
                 lblVariableMark.Visible = false;
                 txtVS.Visible = false;
                 lblSpecificMark.Visible = false;
@@ -54,11 +56,12 @@ namespace BankSystem
                 txtIban.Visible = true;
                 lblFirstNameRecieved.Visible = true;
                 lblLastNameRecieved.Visible = true;
-
-
+                #endregion
+                //lblIbanRecieved.Text =
             }
             else
             {
+                #region Visibility
                 lblIbanSend.Visible = true;
                 lblFirstNameSend.Visible = true;
                 lblLastNameSend.Visible = true;
@@ -77,6 +80,7 @@ namespace BankSystem
                 txtIban.Visible = false;
                 lblFirstNameRecieved.Visible = false;
                 lblLastNameRecieved.Visible = false;
+                #endregion
 
             }
         }

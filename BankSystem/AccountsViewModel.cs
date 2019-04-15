@@ -18,9 +18,9 @@ namespace BankSystem
             _accountRepository = new AccountRepository();
         }
 
-        public DataSet LoadAccounts()
+        public DataSet LoadAccounts(string idNumber, string firstName, string lastName)
         {
-            return _accountRepository.LoadAccounts();
+            return _accountRepository.LoadAccounts(idNumber, firstName, lastName);
         }
         public string LoadClientIdNumber(int accountId)
         {

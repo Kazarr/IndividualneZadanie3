@@ -31,10 +31,12 @@
             this.cmdManageAccount = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtFilterAccountNumber = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtFilterAccountFirstName = new System.Windows.Forms.TextBox();
             this.lblFilterAccountNumber = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
             this.dgvAccounts = new System.Windows.Forms.DataGridView();
+            this.lblLastname = new System.Windows.Forms.Label();
+            this.txtFilterAccountLastName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,13 +67,15 @@
             this.txtFilterAccountNumber.Name = "txtFilterAccountNumber";
             this.txtFilterAccountNumber.Size = new System.Drawing.Size(100, 20);
             this.txtFilterAccountNumber.TabIndex = 12;
+            this.txtFilterAccountNumber.TextChanged += new System.EventHandler(this.txtFilterAccountNumber_TextChanged);
             // 
-            // textBox2
+            // txtFilterAccountFirstName
             // 
-            this.textBox2.Location = new System.Drawing.Point(141, 25);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 13;
+            this.txtFilterAccountFirstName.Location = new System.Drawing.Point(141, 25);
+            this.txtFilterAccountFirstName.Name = "txtFilterAccountFirstName";
+            this.txtFilterAccountFirstName.Size = new System.Drawing.Size(100, 20);
+            this.txtFilterAccountFirstName.TabIndex = 13;
+            this.txtFilterAccountFirstName.TextChanged += new System.EventHandler(this.txtFilterAccountFirstName_TextChanged);
             // 
             // lblFilterAccountNumber
             // 
@@ -82,33 +86,55 @@
             this.lblFilterAccountNumber.TabIndex = 14;
             this.lblFilterAccountNumber.Text = "Account number";
             // 
-            // label3
+            // lblName
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(138, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "label3";
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(138, 9);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(55, 13);
+            this.lblName.TabIndex = 15;
+            this.lblName.Text = "First name";
             // 
             // dgvAccounts
             // 
+            this.dgvAccounts.AllowUserToAddRows = false;
+            this.dgvAccounts.AllowUserToDeleteRows = false;
             this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAccounts.Location = new System.Drawing.Point(12, 51);
             this.dgvAccounts.Name = "dgvAccounts";
+            this.dgvAccounts.ReadOnly = true;
             this.dgvAccounts.Size = new System.Drawing.Size(560, 164);
             this.dgvAccounts.TabIndex = 16;
             this.dgvAccounts.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccounts_RowEnter);
+            // 
+            // lblLastname
+            // 
+            this.lblLastname.AutoSize = true;
+            this.lblLastname.Location = new System.Drawing.Point(244, 9);
+            this.lblLastname.Name = "lblLastname";
+            this.lblLastname.Size = new System.Drawing.Size(56, 13);
+            this.lblLastname.TabIndex = 18;
+            this.lblLastname.Text = "Last name";
+            // 
+            // txtFilterAccountLastName
+            // 
+            this.txtFilterAccountLastName.Location = new System.Drawing.Point(247, 25);
+            this.txtFilterAccountLastName.Name = "txtFilterAccountLastName";
+            this.txtFilterAccountLastName.Size = new System.Drawing.Size(100, 20);
+            this.txtFilterAccountLastName.TabIndex = 17;
+            this.txtFilterAccountLastName.TextChanged += new System.EventHandler(this.txtFilterAccountLastName_TextChanged);
             // 
             // frmAccounts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 352);
+            this.Controls.Add(this.lblLastname);
+            this.Controls.Add(this.txtFilterAccountLastName);
             this.Controls.Add(this.dgvAccounts);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblName);
             this.Controls.Add(this.lblFilterAccountNumber);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtFilterAccountFirstName);
             this.Controls.Add(this.txtFilterAccountNumber);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmdManageAccount);
@@ -125,9 +151,11 @@
         private System.Windows.Forms.Button cmdManageAccount;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtFilterAccountNumber;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtFilterAccountFirstName;
         private System.Windows.Forms.Label lblFilterAccountNumber;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.DataGridView dgvAccounts;
+        private System.Windows.Forms.Label lblLastname;
+        private System.Windows.Forms.TextBox txtFilterAccountLastName;
     }
 }

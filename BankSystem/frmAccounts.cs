@@ -19,7 +19,7 @@ namespace BankSystem
         {
             InitializeComponent();
             _accountsViewModel = new AccountsViewModel();
-            dgvAccounts.DataSource = _accountsViewModel.LoadAccounts();
+            dgvAccounts.DataSource = _accountsViewModel.LoadAccounts(txtFilterAccountNumber.Text, txtFilterAccountFirstName.Text, txtFilterAccountLastName.Text);
             dgvAccounts.DataMember = "Account";
             dgvAccounts.Columns[0].Visible = false;
             _idNumber = (string)dgvAccounts.Rows[0].Cells["IdNumber"].Value;
@@ -36,6 +36,27 @@ namespace BankSystem
         private void dgvAccounts_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             _idNumber = (string)dgvAccounts.Rows[e.RowIndex].Cells["IdNumber"].Value;
+        }
+
+        private void txtFilterAccountNumber_TextChanged(object sender, EventArgs e)
+        {
+            dgvAccounts.DataSource = _accountsViewModel.LoadAccounts(txtFilterAccountNumber.Text, txtFilterAccountFirstName.Text, txtFilterAccountLastName.Text);
+            dgvAccounts.DataMember = "Account";
+            dgvAccounts.Columns[0].Visible = false;
+        }
+
+        private void txtFilterAccountFirstName_TextChanged(object sender, EventArgs e)
+        {
+            dgvAccounts.DataSource = _accountsViewModel.LoadAccounts(txtFilterAccountNumber.Text, txtFilterAccountFirstName.Text, txtFilterAccountLastName.Text);
+            dgvAccounts.DataMember = "Account";
+            dgvAccounts.Columns[0].Visible = false;
+        }
+
+        private void txtFilterAccountLastName_TextChanged(object sender, EventArgs e)
+        {
+            dgvAccounts.DataSource = _accountsViewModel.LoadAccounts(txtFilterAccountNumber.Text, txtFilterAccountFirstName.Text, txtFilterAccountLastName.Text);
+            dgvAccounts.DataMember = "Account";
+            dgvAccounts.Columns[0].Visible = false;
         }
     }
 }

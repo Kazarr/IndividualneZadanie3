@@ -195,7 +195,7 @@ namespace Data.Repositories
                                               set account.amount = account.amount + 
                                                                 (select top 1 amount from [Transaction] as t
 		                                                            join AccountTransaction as act on t.id = act.Id_Transaction
-		                                                            where act.id_account = @Id
+		                                                            where act.Id_DestinationAccount = @Id
 		                                                            order by t.id desc)
                                             where account.id = @Id";
                         command.Parameters.Add("@Id", SqlDbType.Int).Value = account.Id;
@@ -236,7 +236,7 @@ namespace Data.Repositories
                 }
             }
         }
-        public DataSet LoadAccounts()
+        public DataSet LoadAccounts(string idNumber, string firstName, string lastName)
         {
             using (SqlConnection connection = base.Connection)
             {
@@ -246,8 +246,16 @@ namespace Data.Repositories
                     using (SqlCommand command = new SqlCommand())
                     {
                         command.Connection = connection;
-                        command.CommandText = @"select c.Id, c.Firstname, c.LastName, c.Adress, c.IdNumber, ct.Name, ct.PostalCode from client as c
-                                                join city as ct on c.Id_City = ct.Id";
+                        command.CommandText = @"SELECT c.Id, c.Firstname, c.LastName, 
+		                                        c.Adress, c.IdNumber, ct.Name, ct.PostalCode 
+		                                        FROM client AS c
+                                                JOIN city AS ct on c.Id_City = ct.Id
+                                                WHERE c.IdNumber LIKE @IdNumber AND 
+		                                        c.FirstName LIKE @FirstName AND 
+		                                        c.LastName LIKE @LastName";
+                        command.Parameters.Add("@IdNumber", SqlDbType.VarChar).Value = $"%{idNumber}%";
+                        command.Parameters.Add("@FirstName", SqlDbType.VarChar).Value = $"%{firstName}%";
+                        command.Parameters.Add("@LastName", SqlDbType.VarChar).Value = $"%{lastName}%";
                         using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                         {
                             DataSet ds = new DataSet();

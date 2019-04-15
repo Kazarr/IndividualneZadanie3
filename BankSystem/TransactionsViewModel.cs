@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Data.Models;
 using Data.Repositories;
 
@@ -76,16 +77,24 @@ namespace BankSystem
         {
             return _accountRepository.FindAccountIdByIban(iban);
         }
-        public void InsertTransaction(int amount,int accountId, int destinationAccountId)
+        public void InsertTransaction(int vs, int ss, int ks, int amount,int accountId, int destinationAccountId)
         {
             Transaction.Amount = amount;
             Transaction.TypeTransaction = 'T';
+            Transaction.VS = vs;
+            Transaction.SS = ss;
+            Transaction.KS = ks;
             Transaction.Id = _transactionRepository.InsertTransaction(Transaction);
             _transactionRepository.InsertAccountTransaction(Transaction.Id, accountId, destinationAccountId);
             Account.Id = accountId;
             DestinationAccount.Id = destinationAccountId;
             _accountRepository.UpdateSourceAccountAmount(Account);
             _accountRepository.UpdateDestinationAccountAmount(DestinationAccount);
+        }
+
+        public Client LoadClientByIban(string iban)
+        {
+            return _clientRepository.GetClientByIdIban(iban);
         }
     }
 }

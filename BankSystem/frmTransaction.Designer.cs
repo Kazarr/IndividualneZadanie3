@@ -100,6 +100,7 @@
             this.txtIban.Name = "txtIban";
             this.txtIban.Size = new System.Drawing.Size(205, 20);
             this.txtIban.TabIndex = 14;
+            this.txtIban.Leave += new System.EventHandler(this.txtIban_Leave);
             // 
             // lblIbanRecieved
             // 

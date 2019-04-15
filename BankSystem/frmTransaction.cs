@@ -25,6 +25,8 @@ namespace BankSystem
             btnDone.Visible = true;
             btnOk.Visible = false;
             lblIbanSend.Text = account.IBAN;
+            lblFirstNameSend.Text = _transactionsViewModel.Client.FirstName;
+            lblLastNameSend.Text = _transactionsViewModel.Client.LastName;
         }
 
         public frmTransaction(Account account, bool deposit)
@@ -114,12 +116,22 @@ namespace BankSystem
         private void btnDone_Click(object sender, EventArgs e)
         {
             int amount;
-            if(int.TryParse(txtAmount.Text, out amount))
+            int vs;
+            int ss;
+            int ks;
+            if(int.TryParse(txtAmount.Text, out amount)&&int.TryParse(txtVS.Text,out vs)&&int.TryParse(txtSS.Text,out ss)&&int.TryParse(txtKS.Text,out ks))
             {
-                _transactionsViewModel.InsertTransaction(amount, _transactionsViewModel.Account.Id, _transactionsViewModel.FindAccountByIban(txtIban.Text));
+                _transactionsViewModel.InsertTransaction(vs, ss, ks,amount, _transactionsViewModel.Account.Id, _transactionsViewModel.FindAccountByIban(txtIban.Text));
             }
             this.DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private void txtIban_Leave(object sender, EventArgs e)
+        {
+            
+            lblFirstNameRecieved.Text = _transactionsViewModel.LoadClientByIban(txtIban.Text).FirstName;
+            lblLastNameRecieved.Text = _transactionsViewModel.LoadClientByIban(txtIban.Text).LastName;
         }
     }
 }

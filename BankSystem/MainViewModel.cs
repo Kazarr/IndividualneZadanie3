@@ -9,6 +9,7 @@ namespace BankSystem
 {
     public class MainViewModel
     {
+        private AccountRepository _accountRepository;
         public MainViewModel()
         {
             ClientRepository = new ClientRepository();

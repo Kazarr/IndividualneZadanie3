@@ -17,6 +17,7 @@ namespace BankSystem
         {
             InitializeComponent();
             MainViewModel = new MainViewModel();
+            //dgvTop10MaxMoney.DataSource = _
         }
 
         private void cmdFindClient_Click(object sender, EventArgs e)

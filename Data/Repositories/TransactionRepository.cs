@@ -92,11 +92,14 @@ namespace Data.Repositories
                     using (SqlCommand command = new SqlCommand())
                     {
                         command.Connection = connection;
-                        command.CommandText = @"INSERT INTO [Transaction] (Amount, TypeTransaction)
+                        command.CommandText = @"INSERT INTO [Transaction] (Amount, TypeTransaction, VS, SS, KS)
                                                 OUTPUT INSERTED.Id
-                                                VALUES (@Amount, @TypeTransaction)";
+                                                VALUES (@Amount, @TypeTransaction, @VS, @SS, @KS)";
                         command.Parameters.Add("@Amount", SqlDbType.Decimal).Value = transaction.Amount;
                         command.Parameters.Add("@TypeTransaction", SqlDbType.Char).Value = transaction.TypeTransaction;
+                        command.Parameters.Add("@VS", SqlDbType.Int).Value = transaction.VS;
+                        command.Parameters.Add("@SS", SqlDbType.Int).Value = transaction.SS;
+                        command.Parameters.Add("@KS", SqlDbType.Int).Value = transaction.KS;
                         return (int)command.ExecuteScalar();
                     }
                 }

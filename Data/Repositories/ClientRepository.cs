@@ -229,6 +229,43 @@ namespace Data.Repositories
             }
             return false;
         }
+        public Client GetClientByIdIban(string pattern)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"SELECT c.id, c.firstname, c.lastname, c.adress, c.id_city, c.idNumber FROM Client as c 
+                                                join account as a on c.id = a.id_client
+                                                WHERE a.iban = @pattern";
+                        command.Parameters.Add("@pattern", SqlDbType.VarChar).Value = pattern;
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int clienId = reader.GetInt32(0);
+                                string firstName = reader.GetString(1);
+                                string lastname = reader.GetString(2);
+                                string adress = reader.GetString(3);
+                                int idCity = reader.GetInt32(4);
+                                string idNumber = reader.GetString(5);
+                                return new Client(clienId, firstName, lastname, adress, idCity, idNumber);
+                            }
+                            else { throw new Exception("You dont have anything to read"); }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
         public bool FindClientByFirstName(string name)
         {
             using (base.Connection)

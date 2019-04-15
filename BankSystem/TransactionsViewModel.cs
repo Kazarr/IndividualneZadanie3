@@ -11,51 +11,66 @@ namespace BankSystem
 {
     public class TransactionsViewModel
     {
-        private Account _account;
-        private Account _destinationAccount;
-        private Transaction _transaction;
+        public Account Account { get; set; }
+        public Client Client { get; set; }
+        public Account DestinationAccount { get; set; }
+        public Transaction Transaction { get; set; }
         private TransactionRepository _transactionRepository;
         private AccountRepository _accountRepository;
+        private ClientRepository _clientRepository;
 
         public TransactionsViewModel()
         {
             _transactionRepository = new TransactionRepository();
-            _account = new Account();
             _accountRepository = new AccountRepository();
-            _transaction = new Transaction();
-            _destinationAccount = new Account();
+            _clientRepository = new ClientRepository();
+            Transaction = new Transaction();
+            DestinationAccount = new Account();
+            Account = new Account();
+            Client = new Client();
         }
 
+        public TransactionsViewModel(Account account)
+        {
+            _transactionRepository = new TransactionRepository();
+            Account = account;
+            _accountRepository = new AccountRepository();
+            Transaction = new Transaction();
+            DestinationAccount = new Account();
+            _clientRepository = new ClientRepository();
+            Client = new Client();
+            Client = _clientRepository.LoadClient(account);
+
+        }
         public DataSet LoadAllTransactions()
         {
             return _transactionRepository.LoadAllTransactions();
         }
-
         public DataSet LoadClientTransactions(int accountId)
         {
             return _transactionRepository.LoadAllTransactions(accountId);
         }
         public void Deposit(int amount, int accountId)
         {
-            _transaction = new Transaction();
-            _transaction.Amount = amount;
-            _transaction.TypeTransaction = 'D';
-            _account = new Account();
-            _account.Id = accountId;
+            Transaction = new Transaction();
+            Transaction.Amount = amount;
+            Transaction.TypeTransaction = 'D';
+            Account = new Account();
+            Account.Id = accountId;
 
-            _transaction.Id = _transactionRepository.Deposit(_transaction);
-            _transactionRepository.AccountDeposit(_transaction,_account.Id);
+            Transaction.Id = _transactionRepository.Deposit(Transaction);
+            _transactionRepository.AccountDeposit(Transaction,Account.Id);
         }
         public void Withdrawal(int amount, int accoundId)
         {
-            _transaction = new Transaction();
-            _transaction.Amount = amount;
-            _transaction.TypeTransaction = 'W';
-            _account = new Account();
-            _account.Id = accoundId;
+            Transaction = new Transaction();
+            Transaction.Amount = amount;
+            Transaction.TypeTransaction = 'W';
+            Account = new Account();
+            Account.Id = accoundId;
 
-            _transaction.Id =_transactionRepository.Withdrawal(_transaction);
-            _transactionRepository.AccountWithdrawal(_transaction, _account.Id);
+            Transaction.Id =_transactionRepository.Withdrawal(Transaction);
+            _transactionRepository.AccountWithdrawal(Transaction, Account.Id);
         }
         public int FindAccountByIban(string iban)
         {
@@ -63,14 +78,14 @@ namespace BankSystem
         }
         public void InsertTransaction(int amount,int accountId, int destinationAccountId)
         {
-            _transaction.Amount = amount;
-            _transaction.TypeTransaction = 'T';
-            _transaction.Id = _transactionRepository.InsertTransaction(_transaction);
-            _transactionRepository.InsertAccountTransaction(_transaction.Id, accountId, destinationAccountId);
-            _account.Id = accountId;
-            _destinationAccount.Id = destinationAccountId;
-            _accountRepository.UpdateSourceAccountAmount(_account);
-            _accountRepository.UpdateDestinationAccountAmount(_destinationAccount);
+            Transaction.Amount = amount;
+            Transaction.TypeTransaction = 'T';
+            Transaction.Id = _transactionRepository.InsertTransaction(Transaction);
+            _transactionRepository.InsertAccountTransaction(Transaction.Id, accountId, destinationAccountId);
+            Account.Id = accountId;
+            DestinationAccount.Id = destinationAccountId;
+            _accountRepository.UpdateSourceAccountAmount(Account);
+            _accountRepository.UpdateDestinationAccountAmount(DestinationAccount);
         }
     }
 }

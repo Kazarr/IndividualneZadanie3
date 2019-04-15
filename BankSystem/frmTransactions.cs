@@ -20,6 +20,7 @@ namespace BankSystem
         {
             InitializeComponent();
             _transactionViewModel = new TransactionsViewModel();
+            _transactionViewModel.Account = _transactionViewModel.Account;
             dgvTransactions.DataSource = _transactionViewModel.LoadAllTransactions();
             dgvTransactions.DataMember = "Transactions";
         }
@@ -32,6 +33,7 @@ namespace BankSystem
         {
             InitializeComponent();
             _transactionViewModel = new TransactionsViewModel();
+            _transactionViewModel.Account.Id = accountId;
             dgvTransactions.DataSource = _transactionViewModel.LoadClientTransactions(accountId);
             dgvTransactions.DataMember = "Transactions";
             dgvTransactions.Columns["Id"].Visible = false;

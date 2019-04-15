@@ -29,41 +29,32 @@ namespace TransformerBank
 
             if(int.TryParse(txtCardNumber.Text, out cardId))
             {
-                _card.Id = cardId;
-                if(_card.Id == cardId)
+                if (_mainViewModel.CardExpireDate(cardId) > DateTime.Now)
                 {
-                    if (_mainViewModel.CardExpireDate(cardId) > DateTime.Now)
+                    if (_mainViewModel.Login(cardId, txtPin.Text))
                     {
-                        if (COUNT < 3)
+                        using (frmWithdrawal newform = new frmWithdrawal(cardId))
                         {
-                            if (_mainViewModel.Login(cardId, txtPin.Text))
+                            newform.ShowDialog();
+                            if (newform.DialogResult == DialogResult.OK)
                             {
-                                using (frmWithdrawal newform = new frmWithdrawal(cardId))
-                                {
-                                    newform.ShowDialog();
-                                    if (newform.DialogResult == DialogResult.OK)
-                                    {
-                                        txtCardNumber.Text = null;
-                                        txtPin.Text = null;
-                                    }
-                                }
+                                txtCardNumber.Text = null;
+                                txtPin.Text = null;
                             }
-                            else
-                            {
-                                COUNT++;
-                            }
-                        }
-                        else
-                        {
-                            _mainViewModel.CloseCard(_card);
                         }
                     }
+                    else
+                    {
+                        COUNT++;
+                    }
                 }
-                else
-                {
-                    COUNT = 0;
-                }
+                
             }
+        }
+
+        private void txtCardNumber_TextChanged(object sender, EventArgs e)
+        {
+            COUNT = 0;
         }
     }
 }

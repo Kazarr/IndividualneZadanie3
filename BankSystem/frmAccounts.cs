@@ -14,7 +14,7 @@ namespace BankSystem
     public partial class frmAccounts : Form
     {
         private AccountsViewModel _accountsViewModel;
-        private string _idNumber;
+        //private string _idNumber;
         public frmAccounts()
         {
             InitializeComponent();
@@ -22,12 +22,12 @@ namespace BankSystem
             dgvAccounts.DataSource = _accountsViewModel.LoadAccounts(txtFilterAccountNumber.Text, txtFilterAccountFirstName.Text, txtFilterAccountLastName.Text);
             dgvAccounts.DataMember = "Account";
             dgvAccounts.Columns[0].Visible = false;
-            _idNumber = (string)dgvAccounts.Rows[0].Cells["IdNumber"].Value;
+            _accountsViewModel.IdNumber = (string)dgvAccounts.Rows[0].Cells["IdNumber"].Value;
         }
 
         private void cmdManageAccount_Click(object sender, EventArgs e)
         {
-            using (frmClientManagement newForm = new frmClientManagement(_idNumber))
+            using (frmClientManagement newForm = new frmClientManagement(_accountsViewModel.IdNumber))
             {
                 newForm.ShowDialog();
             }
@@ -35,7 +35,7 @@ namespace BankSystem
 
         private void dgvAccounts_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            _idNumber = (string)dgvAccounts.Rows[e.RowIndex].Cells["IdNumber"].Value;
+            _accountsViewModel.IdNumber = (string)dgvAccounts.Rows[e.RowIndex].Cells["IdNumber"].Value;
         }
 
         private void txtFilterAccountNumber_TextChanged(object sender, EventArgs e)

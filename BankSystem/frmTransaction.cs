@@ -8,29 +8,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Data.Models;
+using Data.Repositories;
 
 namespace BankSystem
 {
     public partial class frmTransaction : Form
     {
         private TransactionsViewModel _transactionsViewModel;
-        private int _accountId;
         //private int _destinationAccountId;
         private bool _deposit;
-        public frmTransaction(int accountId)
+        public frmTransaction(Account account)
         {
             InitializeComponent();
-            _transactionsViewModel = new TransactionsViewModel();
+            _transactionsViewModel = new TransactionsViewModel(account);
+            _transactionsViewModel.Account = account;
             btnDone.Visible = true;
             btnOk.Visible = false;
-            _accountId = accountId;
+            lblIbanSend.Text = account.IBAN;
         }
 
-        public frmTransaction(int accountId, bool deposit)
+        public frmTransaction(Account account, bool deposit)
         {
-            _transactionsViewModel = new TransactionsViewModel();
+            _transactionsViewModel = new TransactionsViewModel(account);
+            _transactionsViewModel.Account = account;
             InitializeComponent();
-            _accountId = accountId;
             _deposit = deposit;
             btnOk.Visible = true;
             btnDone.Visible = false;
@@ -57,7 +58,10 @@ namespace BankSystem
                 lblFirstNameRecieved.Visible = true;
                 lblLastNameRecieved.Visible = true;
                 #endregion
-                //lblIbanRecieved.Text =
+                txtIban.Text = account.IBAN;
+                txtIban.Enabled = false;
+                lblFirstNameRecieved.Text = _transactionsViewModel.Client.FirstName;
+                lblLastNameRecieved.Text = _transactionsViewModel.Client.LastName;
             }
             else
             {
@@ -81,7 +85,9 @@ namespace BankSystem
                 lblFirstNameRecieved.Visible = false;
                 lblLastNameRecieved.Visible = false;
                 #endregion
-
+                lblIbanSend.Text = account.IBAN;
+                lblFirstNameSend.Text = _transactionsViewModel.Client.FirstName;
+                lblLastNameSend.Text = _transactionsViewModel.Client.LastName;
             }
         }
 
@@ -93,12 +99,12 @@ namespace BankSystem
             {
                 if (_deposit)
                 {
-                    _transactionsViewModel.Deposit(amount, _accountId);
+                    _transactionsViewModel.Deposit(amount,_transactionsViewModel.Account.Id);
                     this.DialogResult = DialogResult.OK;
                 }
                 else
                 {
-                    _transactionsViewModel.Withdrawal(amount, _accountId);
+                    _transactionsViewModel.Withdrawal(amount, _transactionsViewModel.Account.Id);
                     this.DialogResult = DialogResult.OK;
                 }
                 
@@ -110,7 +116,7 @@ namespace BankSystem
             int amount;
             if(int.TryParse(txtAmount.Text, out amount))
             {
-                _transactionsViewModel.InsertTransaction(amount, _accountId, _transactionsViewModel.FindAccountByIban(txtIban.Text));
+                _transactionsViewModel.InsertTransaction(amount, _transactionsViewModel.Account.Id, _transactionsViewModel.FindAccountByIban(txtIban.Text));
             }
             this.DialogResult = DialogResult.OK;
             Close();

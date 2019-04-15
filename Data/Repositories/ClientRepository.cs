@@ -37,6 +37,45 @@ namespace Data.Repositories
                 }
             }
         }
+
+        public Client LoadClient(Account account)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"  SELECT * FROM Client as c
+                                                 join Account as a on c.id = a.Id_Client
+                                                 WHERE a.Id = @IdAccount";
+                        command.Parameters.Add("@IdAccount", SqlDbType.VarChar).Value = account.Id;
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int clienId = reader.GetInt32(0);
+                                string firstName = reader.GetString(1);
+                                string lastname = reader.GetString(2);
+                                string adress = reader.GetString(3);
+                                int idCity = reader.GetInt32(4);
+                                string idNumber = reader.GetString(5);
+                                return new Client(clienId, firstName, lastname, adress, idCity, idNumber);
+                            }
+                            else { throw new Exception("You dont have anything to read"); }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+
         public Client LoadClient(int idClient)
         {
             using (SqlConnection connection = base.Connection)
@@ -136,6 +175,7 @@ namespace Data.Repositories
                 }
             }
         }
+
 
         public bool FindClientById(int id)
         {

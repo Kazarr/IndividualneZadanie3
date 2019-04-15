@@ -11,7 +11,7 @@ namespace Data.Repositories
 {
     public class AccountRepository:MyConnection
     {
-        public Account LoadAccount(int clientId)
+        public Account LoadAccount(int IdAccount)
         {
             using (SqlConnection connection = base.Connection)
             {
@@ -21,8 +21,8 @@ namespace Data.Repositories
                     using(SqlCommand command = new SqlCommand())
                     {
                         command.Connection = connection;
-                        command.CommandText = @"SELECT * FROM Account where Id = @Pattern";
-                        command.Parameters.Add("@Pattern", SqlDbType.Int).Value = clientId;
+                        command.CommandText = @"SELECT * FROM Account where Id = @IdAccount";
+                        command.Parameters.Add("@IdAccount", SqlDbType.Int).Value = IdAccount;
                         using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                         {
                             DataSet ds = new DataSet();
@@ -48,6 +48,47 @@ namespace Data.Repositories
                 }
             }
             //return null;
+        }
+
+        public Account LoadAccount(string idClientNumber)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"SELECT * FROM Account as a 
+                                                Join Client as c on a.Id_client = c.id
+                                                where c.IdNumber = @idClientNumber";
+                        command.Parameters.Add("@idClientNumber", SqlDbType.VarChar).Value = idClientNumber;
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            DataSet ds = new DataSet();
+                            adapter.Fill(ds, "Account");
+                            DataTable dt = ds.Tables["Account"];
+
+                            int id = int.Parse(ds.Tables["Account"].Rows[0][0].ToString());
+                            int idClient = int.Parse(ds.Tables["Account"].Rows[0][1].ToString());
+                            int idBank = int.Parse(ds.Tables["Account"].Rows[0][2].ToString());
+                            DateTime CreationDate = DateTime.Parse(ds.Tables["Account"].Rows[0][3].ToString());
+                            //DateTime ExpireDate = DateTime.Parse(ds.Tables["Account"].Rows[0][4].ToString());
+                            decimal amount = decimal.Parse(ds.Tables["Account"].Rows[0][5].ToString());
+                            string IBAN = ds.Tables["Account"].Rows[0][6].ToString();
+                            decimal ActualOverFlow = decimal.Parse(ds.Tables["Account"].Rows[0][7].ToString());
+                            decimal OverFlowLimit = decimal.Parse(ds.Tables["Account"].Rows[0][8].ToString());
+
+                            return new Account(id, idClient, idBank, CreationDate, amount, IBAN, ActualOverFlow, OverFlowLimit);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
         }
 
         public int FinAccountIdByCardId(int idCard)

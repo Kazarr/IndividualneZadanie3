@@ -41,6 +41,7 @@
             this.txtCardNumber.Name = "txtCardNumber";
             this.txtCardNumber.Size = new System.Drawing.Size(100, 20);
             this.txtCardNumber.TabIndex = 0;
+            this.txtCardNumber.TextChanged += new System.EventHandler(this.txtCardNumber_TextChanged);
             // 
             // txtPin
             // 

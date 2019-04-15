@@ -12,6 +12,7 @@ namespace BankSystem
     public class AccountsViewModel
     {
         private AccountRepository _accountRepository { get; set; }
+        public string IdNumber { get; set; }
 
         public AccountsViewModel()
         {

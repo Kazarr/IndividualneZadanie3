@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.cmdUpdate = new System.Windows.Forms.Button();
             this.cmdNewTransaction = new System.Windows.Forms.Button();
             this.cmdCloseAccount = new System.Windows.Forms.Button();
@@ -45,22 +44,10 @@
             this.dgvCards = new System.Windows.Forms.DataGridView();
             this.btnAddCard = new System.Windows.Forms.Button();
             this.btnCloseCard = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCards)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.Cyan;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(732, 143);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Niekde v tomto okne budú stručné NEEDITOVATEĽNÉ informácie o účte, klientovi, akt" +
-    "uálnom zostatku na účte a povolenom prečerpaní.";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cmdUpdate
             // 
@@ -193,10 +180,10 @@
             this.dgvAccount.AllowUserToAddRows = false;
             this.dgvAccount.AllowUserToDeleteRows = false;
             this.dgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAccount.Location = new System.Drawing.Point(12, 10);
+            this.dgvAccount.Location = new System.Drawing.Point(36, 10);
             this.dgvAccount.Name = "dgvAccount";
             this.dgvAccount.ReadOnly = true;
-            this.dgvAccount.Size = new System.Drawing.Size(731, 142);
+            this.dgvAccount.Size = new System.Drawing.Size(707, 142);
             this.dgvAccount.TabIndex = 18;
             this.dgvAccount.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccount_RowEnter);
             // 
@@ -233,11 +220,21 @@
             this.btnCloseCard.UseVisualStyleBackColor = true;
             this.btnCloseCard.Click += new System.EventHandler(this.btnCloseCard_Click);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(12, 10);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(25, 25);
+            this.btnRefresh.TabIndex = 22;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // frmClientManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(949, 410);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnCloseCard);
             this.Controls.Add(this.btnAddCard);
             this.Controls.Add(this.dgvCards);
@@ -254,7 +251,6 @@
             this.Controls.Add(this.cmdCloseAccount);
             this.Controls.Add(this.cmdNewTransaction);
             this.Controls.Add(this.cmdUpdate);
-            this.Controls.Add(this.label1);
             this.Name = "frmClientManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmClientManagement";
@@ -265,8 +261,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button cmdUpdate;
         private System.Windows.Forms.Button cmdNewTransaction;
         private System.Windows.Forms.Button cmdCloseAccount;
@@ -283,5 +277,6 @@
         private System.Windows.Forms.DataGridView dgvCards;
         private System.Windows.Forms.Button btnAddCard;
         private System.Windows.Forms.Button btnCloseCard;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

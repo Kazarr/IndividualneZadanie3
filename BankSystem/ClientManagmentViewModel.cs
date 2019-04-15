@@ -14,22 +14,23 @@ namespace BankSystem
         private ClientManagmentRepository _clientManagmentRepository { get; set; }
         private CardRepository _cardRepository { get; set; }
         private AccountRepository _accountRepository { get; set; }
-        private Card _card { get; set; }
-        private Client _client { get; set; }
-        private Account _account { get; set; }
-        private Account _destinationAccount { get; set; }
-        private Transaction _transaction { get; set; }
-        //private string _iban { get; set; }
+        public Card Card { get; set; }
+        public Client Client { get; set; }
+        public Account Account { get; set; }
+        public Account DestinationAccount { get; set; }
+        public Transaction Transaction { get; set; }
 
-        public ClientManagmentViewModel()
+        public ClientManagmentViewModel(string idClientNumber)
         {
             _clientManagmentRepository = new ClientManagmentRepository();
             _cardRepository = new CardRepository();
             _accountRepository = new AccountRepository();
-            _card = new Card();
-            _client = new Client();
-            _account = new Account();
-            _transaction = new Transaction();
+            Card = new Card();
+            Client = new Client();
+            Client.IdNumber = idClientNumber;
+            Account = new Account();
+            Transaction = new Transaction();
+            Account = _accountRepository.LoadAccount(idClientNumber);
         }
 
         public DataSet LoadClientManagment(string pattern)
@@ -49,25 +50,25 @@ namespace BankSystem
         public void InsertRandomCard(int accoutnId)
         {
             Random r = new Random();
-            _card.Id_Account = accoutnId;
-            _card.Number = r.Next(Int32.MaxValue);
-            _card.Pin = r.Next(0, 10000).ToString();
-            _card.Id = _cardRepository.InsertCard(_card);
+            Card.Id_Account = accoutnId;
+            Card.Number = r.Next(Int32.MaxValue);
+            Card.Pin = r.Next(0, 10000).ToString();
+            Card.Id = _cardRepository.InsertCard(Card);
         }
         public void UpdateCard(int accountId, int cardId)
         {
-            _card.Id_Account = accountId;
-            _card.Id = cardId;
-            _cardRepository.UpdateCard(_card);
+            Card.Id_Account = accountId;
+            Card.Id = cardId;
+            _cardRepository.UpdateCard(Card);
         }
         public void UpdateAccountAmount()
         {
-            _accountRepository.UpdateAccountAmount(_account);
+            _accountRepository.UpdateAccountAmount(Account);
         }
 
         public void SetAccountId(int id)
         {
-            _account.Id = id;
+            Account.Id = id;
         }
     }
 }

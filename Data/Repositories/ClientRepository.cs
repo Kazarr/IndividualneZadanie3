@@ -11,33 +11,39 @@ namespace Data.Repositories
 {
     public class ClientRepository:MyConnection
     {
-        public DataSet LoadClient()
-        {
-            using (base.Connection)
-            {
-                try
-                {
-                    base.Connection.Open();
-                    using (SqlCommand command = new SqlCommand())
-                    {
-                        command.Connection = base.Connection;
-                        command.CommandText = @"SELECT * FROM Client";
-                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                        {
-                            DataSet ds = new DataSet();
-                            adapter.Fill(ds, "Account");
-                            DataTable dt = ds.Tables["Account"];
-                            return ds;
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    throw;
-                }
-            }
-        }
 
+        //public DataSet LoadClient()
+        //{
+        //    using (base.Connection)
+        //    {
+        //        try
+        //        {
+        //            base.Connection.Open();
+        //            using (SqlCommand command = new SqlCommand())
+        //            {
+        //                command.Connection = base.Connection;
+        //                command.CommandText = @"SELECT * FROM Client";
+        //                using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+        //                {
+        //                    DataSet ds = new DataSet();
+        //                    adapter.Fill(ds, "Account");
+        //                    DataTable dt = ds.Tables["Account"];
+        //                    return ds;
+        //                }
+        //            }
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            throw;
+        //        }
+        //    }
+        //}
+
+            /// <summary>
+            /// Loads client into transaction view model
+            /// </summary>
+            /// <param name="account"></param>
+            /// <returns></returns>
         public Client LoadClient(Account account)
         {
             using (SqlConnection connection = base.Connection)
@@ -76,6 +82,11 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Loads client into account view model
+        /// </summary>
+        /// <param name="idClient"></param>
+        /// <returns></returns>
         public Client LoadClient(int idClient)
         {
             using (SqlConnection connection = base.Connection)
@@ -111,6 +122,11 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// Used when you update client info
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
         public bool UpdateClient(Client client)
         {
             using (SqlConnection connection = base.Connection)
@@ -148,6 +164,11 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// Used when inserting new clinet
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
         public int InsertClient(Client client)
         {
             using (SqlConnection connection = base.Connection)
@@ -176,7 +197,11 @@ namespace Data.Repositories
             }
         }
 
-
+        /// <summary>
+        /// Finds client by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool FindClientById(int id)
         {
             using (base.Connection)
@@ -203,6 +228,11 @@ namespace Data.Repositories
             }
             return false;
         }
+        /// <summary>
+        /// Finds client by idnumber
+        /// </summary>
+        /// <param name="pattern"></param>
+        /// <returns></returns>
         public bool FindClientByIdNumber(string pattern)
         {
             using (SqlConnection connection = base.Connection)
@@ -229,6 +259,11 @@ namespace Data.Repositories
             }
             return false;
         }
+        /// <summary>
+        /// Returns client based on IBAN
+        /// </summary>
+        /// <param name="pattern"></param>
+        /// <returns></returns>
         public Client GetClientByIdIban(string pattern)
         {
             using (SqlConnection connection = base.Connection)
@@ -266,6 +301,11 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// Finds client based on first name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public bool FindClientByFirstName(string name)
         {
             using (base.Connection)
@@ -292,6 +332,11 @@ namespace Data.Repositories
             }
             return false;
         }
+        /// <summary>
+        /// Finds client based on last name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public bool FindClientByLastName(string name)
         {
             using (base.Connection)

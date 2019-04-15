@@ -11,6 +11,11 @@ namespace Data.Repositories
 {
     public class CardRepository:MyConnection
     {
+        /// <summary>
+        /// This is used to load data in card grid in client managment
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
         public DataSet LoadCards(int accountId)
         {
             using (SqlConnection connection = base.Connection)
@@ -39,6 +44,11 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// This is used at ATM if the card can still be used to withdraw money
+        /// </summary>
+        /// <param name="cardId"></param>
+        /// <returns></returns>
         public DateTime GetCardExpireDate(int cardId)
         {
             using (SqlConnection connection = base.Connection)
@@ -61,6 +71,11 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Insert card into DB
+        /// </summary>
+        /// <param name="card"></param>
+        /// <returns></returns>
         public int InsertCard(Card card)
         {
             using (SqlConnection connection = base.Connection)
@@ -86,6 +101,11 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// This will close the card. Technically it will set expire date to today.
+        /// </summary>
+        /// <param name="card"></param>
+        /// <returns></returns>
         public bool UpdateCard(Card card)
         {
             using (SqlConnection connection = base.Connection)
@@ -116,6 +136,11 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// This will return card pin based on card ID. It is used in ATM for login
+        /// </summary>
+        /// <param name="cardId"></param>
+        /// <returns></returns>
         public string GetCardPin(int cardId)
         {
             using (SqlConnection connection = base.Connection)

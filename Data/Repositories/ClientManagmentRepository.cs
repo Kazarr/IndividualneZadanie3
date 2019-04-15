@@ -10,6 +10,11 @@ namespace Data.Repositories
 {
     public class ClientManagmentRepository:MyConnection
     {
+        /// <summary>
+        /// This is used when loading grid in client managment
+        /// </summary>
+        /// <param name="pattern"></param>
+        /// <returns></returns>
         public DataSet LoadClientManagment(string pattern)
         {
             using (SqlConnection connection = base.Connection)
@@ -39,27 +44,33 @@ namespace Data.Repositories
                 }
             }
         }
-        public void SaveClientManagment(decimal overFlowLimit, string firstName, string lastName, string adress, string cityName, string postalCodee, string IdNumber)
-        {
-            using(SqlConnection connection = base.Connection)
-            {
-                try
-                {
-                    connection.Open();
-                    using(SqlCommand command = new SqlCommand())
-                    {
-                        command.Connection = connection;
-                        command.CommandText = @"update Account
-                                                set OverFlowLimit = @OverFlowLimit
-                                                where ";
-                    }
-                }catch(Exception e)
-                {
 
-                }
+        //public void SaveClientManagment(decimal overFlowLimit, string firstName, string lastName, string adress, string cityName, string postalCodee, string IdNumber)
+        //{
+        //    using(SqlConnection connection = base.Connection)
+        //    {
+        //        try
+        //        {
+        //            connection.Open();
+        //            using(SqlCommand command = new SqlCommand())
+        //            {
+        //                command.Connection = connection;
+        //                command.CommandText = @"update Account
+        //                                        set OverFlowLimit = @OverFlowLimit
+        //                                        where ";
+        //            }
+        //        }catch(Exception e)
+        //        {
+
+        //        }
                 
-            }
-        }
+        //    }
+        //}
+        /// <summary>
+        /// This is used when user update client or account info to load actual info
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
         public DataSet LoadUpdatedClientManagment(int accountId)
         {
             using (SqlConnection connection = base.Connection)

@@ -11,6 +11,11 @@ namespace Data.Repositories
 {
     public class TransactionRepository:MyConnection
     {
+        /// <summary>
+        /// Used in overview in all client transactions
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
         public DataSet LoadAllTransactions(int accountId)
         {
             using (SqlConnection connection = base.Connection)
@@ -50,6 +55,13 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Used when adding Transaction between two accounts
+        /// </summary>
+        /// <param name="transactionId"></param>
+        /// <param name="accountId"></param>
+        /// <param name="destinationAccountId"></param>
+        /// <returns></returns>
         public bool InsertAccountTransaction(int transactionId, int accountId, int destinationAccountId)
         {
             using (SqlConnection connection = base.Connection)
@@ -82,6 +94,12 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Inserting transaction between two accounts
+        /// Yea i know it could be one method
+        /// </summary>
+        /// <param name="transaction"></param>
+        /// <returns></returns>
         public int InsertTransaction(Transaction transaction)
         {
             using (SqlConnection connection = base.Connection)
@@ -109,7 +127,12 @@ namespace Data.Repositories
                 }
             }
         }
-
+        /// <summary>
+        /// Inserting transaction witgdrawal
+        /// yea i know it could be one method
+        /// </summary>
+        /// <param name="transaction"></param>
+        /// <returns></returns>
         public int Withdrawal(Transaction transaction)
         {
             using (SqlConnection connection = base.Connection)
@@ -134,7 +157,12 @@ namespace Data.Repositories
                 }
             }
         }
-
+        /// <summary>
+        /// inserting transactino deposit
+        /// yea i know it could be one method
+        /// </summary>
+        /// <param name="transaction"></param>
+        /// <returns></returns>
         public int Deposit(Transaction transaction)
         {
             using (SqlConnection connection = base.Connection)
@@ -159,7 +187,12 @@ namespace Data.Repositories
                 }
             }
         }
-
+        /// <summary>
+        /// Letting know what transaction account should use to update his amount
+        /// </summary>
+        /// <param name="transaction"></param>
+        /// <param name="desinationAccountId"></param>
+        /// <returns></returns>
         public bool AccountDeposit(Transaction transaction, int desinationAccountId)
         {
             using (SqlConnection connection = base.Connection)
@@ -190,6 +223,12 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// Letting know what transaction account should use to update his amount
+        /// </summary>
+        /// <param name="transaction"></param>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
         public bool AccountWithdrawal(Transaction transaction, int accountId)
         {
             using (SqlConnection connection = base.Connection)
@@ -220,6 +259,10 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// Used in overview in all transactions
+        /// </summary>
+        /// <returns></returns>
         public DataSet LoadAllTransactions()
         {
             using (SqlConnection connection = base.Connection)
@@ -246,6 +289,11 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// Used when withdrawing from atm
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         public int InsertATMTransaction(int amount)
         {
             using (SqlConnection connection = base.Connection)
@@ -270,6 +318,12 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// Letting know what transaction account should use to update his amount after withdrawing from atm
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="idTransaction"></param>
+        /// <returns></returns>
         public bool InsertATMAccountTransaction(int accountId, int idTransaction)
         {
             using (SqlConnection connection = base.Connection)

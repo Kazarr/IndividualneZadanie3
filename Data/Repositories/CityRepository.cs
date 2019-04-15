@@ -11,6 +11,11 @@ namespace Data.Repositories
 {
     public class CityRepository:MyConnection
     {
+        /// <summary>
+        /// This is used to load client city
+        /// </summary>
+        /// <param name="clientID"></param>
+        /// <returns></returns>
         public City LoadCity(int clientID)
         {
             using(SqlConnection connection = base.Connection)
@@ -44,6 +49,11 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// This is used to update client city.
+        /// </summary>
+        /// <param name="city"></param>
+        /// <returns></returns>
         public bool UpdateCity(City city)
         {
             using (SqlConnection connection = base.Connection)
@@ -77,6 +87,11 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// This is used to insert new city
+        /// </summary>
+        /// <param name="city"></param>
+        /// <returns></returns>
         public int InsertCity(City city)
         {
             using (SqlConnection connection = base.Connection)

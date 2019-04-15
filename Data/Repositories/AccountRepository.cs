@@ -11,6 +11,11 @@ namespace Data.Repositories
 {
     public class AccountRepository:MyConnection
     {
+        /// <summary>
+        /// Used to load account into form.
+        /// </summary>
+        /// <param name="IdAccount"></param>
+        /// <returns></returns>
         public Account LoadAccount(int IdAccount)
         {
             using (SqlConnection connection = base.Connection)
@@ -49,7 +54,10 @@ namespace Data.Repositories
             }
             //return null;
         }
-
+        /// <summary>
+        /// Used in overviews
+        /// </summary>
+        /// <returns></returns>
         public DataSet GetAccountCount()
         {
             using (SqlConnection connection = base.Connection)
@@ -80,7 +88,10 @@ namespace Data.Repositories
                 }
             }
         }
-
+        /// <summary>
+        /// Used in overviews
+        /// </summary>
+        /// <returns></returns>
         public DataSet GetBankMoney()
         {
             using (SqlConnection connection = base.Connection)
@@ -111,7 +122,10 @@ namespace Data.Repositories
                 }
             }
         }
-
+        /// <summary>
+        /// Used in overviews
+        /// </summary>
+        /// <returns></returns>
         public DataSet GetmaxMoneyClient()
         {
             using (SqlConnection connection = base.Connection)
@@ -143,7 +157,11 @@ namespace Data.Repositories
                 }
             }
         }
-
+        /// <summary>
+        /// Used in loading account into clientmanagmentviewmodel
+        /// </summary>
+        /// <param name="idClientNumber"></param>
+        /// <returns></returns>
         public Account LoadAccount(string idClientNumber)
         {
             using (SqlConnection connection = base.Connection)
@@ -184,7 +202,11 @@ namespace Data.Repositories
                 }
             }
         }
-
+        /// <summary>
+        /// To close actual account
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
         public bool CloseAccount(Account account)
         {
             using (SqlConnection connection = base.Connection)
@@ -215,7 +237,11 @@ namespace Data.Repositories
                 }
             }
         }
-
+        /// <summary>
+        /// Return id of your card based on card nubmer
+        /// </summary>
+        /// <param name="idCard"></param>
+        /// <returns></returns>
         public int FinAccountIdByCardId(int idCard)
         {
             using (SqlConnection connection = base.Connection)
@@ -239,7 +265,11 @@ namespace Data.Repositories
                 }
             }
         }
-
+        /// <summary>
+        /// Update your account overflow limit. Its the only thing you can update on your account
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
         public bool UpdateAccountOverFlowLimit(Account account)
         {
             using(SqlConnection connection = base.Connection)
@@ -270,6 +300,11 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// Will write your account to DB
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
         public bool InsertAccount(Account account)
         {
             using (SqlConnection connection = base.Connection)
@@ -301,6 +336,11 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// This will update account amount based on account last transaction.
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
         public bool UpdateAccountAmount(Account account)
         {
             using (SqlConnection connection = base.Connection)
@@ -339,6 +379,11 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// This will subtract account amount based on the last transaction.
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
         public bool UpdateSourceAccountAmount(Account account)
         {
             using (SqlConnection connection = base.Connection)
@@ -373,6 +418,11 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// This will add account amount based on the last transaction.
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
         public bool UpdateDestinationAccountAmount(Account account)
         {
             using (SqlConnection connection = base.Connection)
@@ -407,6 +457,11 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// Returns Account id based on IBAN
+        /// </summary>
+        /// <param name="Iban"></param>
+        /// <returns></returns>
         public int FindAccountIdByIban(string Iban)
         {
             using (SqlConnection connection = base.Connection)
@@ -428,6 +483,13 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// This is used to filter in grid based on parameters
+        /// </summary>
+        /// <param name="idNumber"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <returns></returns>
         public DataSet LoadAccounts(string idNumber, string firstName, string lastName)
         {
             using (SqlConnection connection = base.Connection)
@@ -464,6 +526,11 @@ namespace Data.Repositories
                 }
             }
         }
+        /// <summary>
+        /// This will return client Idnumber based on account Id
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
         public string LoadIdNubmer(int accountId)
         {
             using (SqlConnection connection = base.Connection)

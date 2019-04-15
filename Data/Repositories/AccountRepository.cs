@@ -50,6 +50,100 @@ namespace Data.Repositories
             //return null;
         }
 
+        public DataSet GetAccountCount()
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"select Count(*) from Account
+                                                where expiredate is null";
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            DataSet ds = new DataSet();
+                            adapter.Fill(ds, "Account");
+                            DataTable dt = ds.Tables["Account"];
+
+
+
+                            return ds;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+
+        public DataSet GetBankMoney()
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"select SUM(Amount) from Account
+                                                where expiredate is null";
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            DataSet ds = new DataSet();
+                            adapter.Fill(ds, "Account");
+                            DataTable dt = ds.Tables["Account"];
+
+
+
+                            return ds;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+
+        public DataSet GetmaxMoneyClient()
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = @"select * from Account 
+                                                where expiredate is null
+                                                order by Amount desc";
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            DataSet ds = new DataSet();
+                            adapter.Fill(ds, "Account");
+                            DataTable dt = ds.Tables["Account"];
+
+
+
+                            return ds;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+
         public Account LoadAccount(string idClientNumber)
         {
             using (SqlConnection connection = base.Connection)

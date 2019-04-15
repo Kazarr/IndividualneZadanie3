@@ -17,7 +17,16 @@ namespace BankSystem
         {
             InitializeComponent();
             MainViewModel = new MainViewModel();
-            //dgvTop10MaxMoney.DataSource = _
+            dgvTop10MaxMoney.DataSource = MainViewModel.GetMaxMoneyClients();
+            dgvTop10MaxMoney.DataMember = "Account";
+            dgvTop10MaxMoney.Columns[0].Visible = false;
+            dgvTop10MaxMoney.Columns[1].Visible = false;
+            dgvTop10MaxMoney.Columns[2].Visible = false;
+            dgvTop10MaxMoney.Columns[4].Visible = false;
+            dgvBankMoney.DataSource = MainViewModel.GetBankMoney();
+            dgvBankMoney.DataMember = "Account";
+            dgvCount.DataSource = MainViewModel.GetAccountCount();
+            dgvCount.DataMember = "Account";
         }
 
         private void cmdFindClient_Click(object sender, EventArgs e)
